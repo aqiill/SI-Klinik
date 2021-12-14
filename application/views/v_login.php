@@ -32,6 +32,11 @@
                 <section class="login_content">
                     <form method="POST" action="<?= base_url('login') ?>" class="needs-validation" novalidate>
                         <h1>Login SI Klinik</h1>
+                        <?php if ($this->session->flashdata('gagal') != "") { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= $this->session->flashdata('gagal') ?>
+                            </div>
+                        <?php } ?>
                         <div>
                             <input type="text" class="form-control" name="username" placeholder="Username" required />
                             <p>

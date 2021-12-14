@@ -13,7 +13,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><?= $this->session->userdata('username') ?></h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -37,7 +37,7 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <a data-toggle="tooltip" data-placement="top" title="Settings" href="<?= base_url('setting/changepass') ?>">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
             <a data-toggle="tooltip" data-placement="top" title="FullScreen">
@@ -46,7 +46,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?= base_url('logout') ?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
@@ -64,16 +64,15 @@
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="https://colorlib.com/polygon/gentelella/images/img.jpg" alt="">John Doe
+                        <img src="https://colorlib.com/polygon/gentelella/images/img.jpg" alt=""><?= $this->session->userdata('username') ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="javascript:;"> Profile</a>
-                        <a class="dropdown-item" href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
+                        <a class="dropdown-item" href="<?= base_url('setting/changepass') ?>">
                             <span>Settings</span>
                         </a>
                         <a class="dropdown-item" href="javascript:;">Help</a>
-                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                        <a class="dropdown-item" href="<?= base_url('logout') ?>"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a>
                     </div>
                 </li>
 

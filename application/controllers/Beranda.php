@@ -12,10 +12,13 @@ class Beranda extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'title'        => 'Beranda',
-            'isi'        => 'admin/v_beranda',
-        );
+        if ($this->session->userdata('level') == "administrator") {
+            $data = array(
+                'title'        => 'Beranda',
+                'isi'        => 'admin/v_beranda',
+            );
+        }
+
         $this->load->view('layout/wrapper', $data);
     }
 

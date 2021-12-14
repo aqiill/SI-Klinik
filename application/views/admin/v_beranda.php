@@ -1,3 +1,13 @@
+<?php
+if ($this->session->flashdata('sukses') != "") { ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert">
+                <?= $this->session->flashdata('sukses') ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
         <div class="card text-center bg-dark text-light">
