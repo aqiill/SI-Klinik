@@ -1,5 +1,12 @@
 <form action="<?= base_url('setting/changepass') ?>" method="POST" class="needs-validation" novalidate>
 
+    <?php if ($this->session->flashdata('gagal') != "") { ?>
+        <div class="form-group mt-5">
+            <div class="alert alert-danger" role="alert">
+                <?= $this->session->flashdata('gagal') ?>
+            </div>
+        </div>
+    <?php } ?>
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" disabled value="<?= $this->session->userdata('username') ?>" class="form-control" id="username">
@@ -24,13 +31,6 @@
         <div class="invalid-feedback">
             Konfirmasi Password harus diisi!
         </div>
-    </div>
-    <div class="form-group">
-        <?php if ($this->session->flashdata('gagal') != "") { ?>
-            <div class="alert alert-danger" role="alert">
-                <?= $this->session->flashdata('gagal') ?>
-            </div>
-        <?php } ?>
     </div>
     <button type="submit" class="btn btn-primary">Simpan</button>
 </form>

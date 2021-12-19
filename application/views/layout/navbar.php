@@ -32,6 +32,24 @@
                 </ul>
             </div>
 
+            <div class="menu_section">
+                <h3>Data Master</h3>
+                <ul class="nav side-menu">
+                    <li><a href="<?= base_url('user') ?>"><i class="fa fa-users"></i> User</a></li>
+                    <li><a href="<?= base_url('obat') ?>"><i class="fas fa-pills"></i> Obat</a></li>
+
+                </ul>
+            </div>
+            <div class="menu_section">
+                <h3>Setting</h3>
+                <ul class="nav side-menu">
+                    <li><a href="<?= base_url('setting/') ?>"><i class="fa fa-user"></i> Profile </a></li>
+                    <li><a href="<?= base_url('setting/changepass') ?>"><i class="fa fa-key"></i> Ganti Password </a></li>
+                    <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out-alt"></i> Logout </a></li>
+
+                </ul>
+            </div>
+
         </div>
         <!-- /sidebar menu -->
 

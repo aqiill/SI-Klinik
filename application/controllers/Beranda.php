@@ -8,6 +8,15 @@ class Beranda extends CI_Controller
         parent::__construct();
         // $this->load->model(['']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
     }
 
     public function index()

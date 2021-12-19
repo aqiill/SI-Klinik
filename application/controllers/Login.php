@@ -53,12 +53,17 @@ class Login extends CI_Controller
 				if ($cek->row()->level == "administrator") {
 					$this->session->set_userdata('id_user', $cek->row()->id_user);
 					$this->session->set_userdata('username', $cek->row()->username);
+					$this->session->set_userdata('nik', $cek->row()->nik);
 					$this->session->set_userdata('level', 'administrator');
 					redirect('beranda');
 				} elseif ($cek->row()->level == "dokter") {
 					echo "anda login sebagai dokter";
 				} elseif ($cek->row()->level == "petugas") {
-					echo "anda login sebagai petugas";
+					$this->session->set_userdata('id_user', $cek->row()->id_user);
+					$this->session->set_userdata('username', $cek->row()->username);
+					$this->session->set_userdata('nik', $cek->row()->nik);
+					$this->session->set_userdata('level', 'administrator');
+					redirect('beranda');
 				} elseif ($cek->row()->level == "apoteker") {
 					echo "anda login sebagai apoteker";
 				}
