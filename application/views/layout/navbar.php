@@ -27,6 +27,7 @@
                 <ul class="nav side-menu">
                     <li><a href="<?= base_url('beranda') ?>"><i class="fa fa-home"></i> Beranda </a></li>
                     <li><a href="<?= base_url('antrian') ?>"><i class="fas fa-grip-lines"></i> Antrian </a></li>
+                    <li><a href="<?= base_url('periksa') ?>"><i class="fas fa-stethoscope"></i> Pemeriksaan </a></li>
                     <li><a href="<?= base_url('pasien') ?>"><i class="fa fa-user"></i> Pasien </a></li>
                     <li><a href="<?= base_url('laporan') ?>"><i class="fa fa-book"></i> Laporan </a></li>
 

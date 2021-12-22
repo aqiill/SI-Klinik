@@ -21,12 +21,12 @@ class Beranda extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('level') == "administrator") {
+        // if ($this->session->userdata('level') == "administrator" || $this->session->userdata('level') == "petugas" ) {
             $data = array(
                 'title'        => 'Beranda',
                 'isi'        => 'admin/v_beranda',
             );
-        }
+        // }
 
         $this->load->view('layout/wrapper', $data);
     }

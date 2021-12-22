@@ -141,8 +141,10 @@ class Antrian extends CI_Controller
             $this->session->set_flashdata('gagal', validation_errors());
 
             $edit_status = array(
-                'status_antrian' => 'pemeriksaan'
+                'status_antrian' => 'pemeriksaan',
+                'id_user' => $this->session->userdata('id_user')
             );
+
             $this->m_antrian->edit('antrian',$edit_status,$id);
 
             $data_pasien = $this->m_antrian->cek_data_pasien('antrian',$id)->row();
@@ -169,7 +171,8 @@ class Antrian extends CI_Controller
                 'id_antrian'        => $id_antrian,
                 'tekanan_darah'        => $tekanan_darah,
                 'suhu_badan'        => $suhu_badan,
-                'keluhan'        => $keluhan
+                'keluhan'        => $keluhan,
+                'status_pemeriksaan'        => 'petugas'
             );
 
             $this->m_antrian->tambah('pemeriksaan', $data);
