@@ -29,6 +29,48 @@ class M_obat extends CI_Model
         return $this->db->get();
     }
 
+    public function resepobat($table)
+    {
+        $this->db->select('nama_pasien,no_antrian,diagnosa,tgl_checkup,umur_pasien,id_resep_obat,rekammedis.id_rekam_medis');
+        $this->db->from($table);
+        $this->db->join('rekammedis', $table.'.id_rekam_medis = rekammedis.id_rekam_medis');
+        $this->db->join('pemeriksaan', 'rekammedis.id_pemeriksaan = pemeriksaan.id_pemeriksaan');
+        $this->db->join('antrian', 'pemeriksaan.id_antrian = antrian.id_antrian');
+        $this->db->join('pasien', 'antrian.id_pasien = pasien.id_pasien');
+        $this->db->group_by($table.'.id_rekam_medis');
+        $this->db->order_by('id_resep_obat', 'ASC');
+        // $this->db->where($table.'.id_rekam_medis', $id);
+        return $this->db->get();
+    }
+
+    public function resepobat_now($table)
+    {
+        $this->db->select('nama_pasien,no_antrian,diagnosa,tgl_checkup,umur_pasien,id_resep_obat,rekammedis.id_rekam_medis');
+        $this->db->from($table);
+        $this->db->join('rekammedis', $table.'.id_rekam_medis = rekammedis.id_rekam_medis');
+        $this->db->join('pemeriksaan', 'rekammedis.id_pemeriksaan = pemeriksaan.id_pemeriksaan');
+        $this->db->join('antrian', 'pemeriksaan.id_antrian = antrian.id_antrian');
+        $this->db->join('pasien', 'antrian.id_pasien = pasien.id_pasien');
+        $this->db->group_by($table.'.id_rekam_medis');
+        $this->db->order_by('id_resep_obat', 'ASC');
+        $this->db->where('antrian.tgl_checkup', date('Y-m-d'));
+        return $this->db->get();
+    }
+
+    public function detail_obat($table,$id)
+    {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join('rekammedis', $table.'.id_rekam_medis = rekammedis.id_rekam_medis');
+        $this->db->join('pemeriksaan', 'rekammedis.id_pemeriksaan = pemeriksaan.id_pemeriksaan');
+        $this->db->join('antrian', 'pemeriksaan.id_antrian = antrian.id_antrian');
+        $this->db->join('pasien', 'antrian.id_pasien = pasien.id_pasien');
+        $this->db->join('obat', $table.'.id_obat = obat.id_obat');
+        // $this->db->order_by('id_resep_obat', 'ASC');
+        $this->db->where($table.'.id_rekam_medis', $id);
+        return $this->db->get();
+    }
+
     public function cek_pasien($table,$id)
     {
         $this->db->select('nik_pasien,nama_pasien,umur_pasien,jenis_kelamin,id_rekam_medis');

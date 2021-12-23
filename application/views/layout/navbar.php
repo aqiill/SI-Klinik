@@ -26,22 +26,41 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     <li><a href="<?= base_url('beranda') ?>"><i class="fa fa-home"></i> Beranda </a></li>
+                    <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
                     <li><a href="<?= base_url('antrian') ?>"><i class="fas fa-grip-lines"></i> Antrian </a></li>
+                    <?php endif ?>
+                    <?php if ($this->session->userdata('level') !="apoteker"): ?>
                     <li><a href="<?= base_url('periksa') ?>"><i class="fas fa-stethoscope"></i> Pemeriksaan </a></li>
+                    <?php endif ?>
+                    <?php if ($this->session->userdata('level') !="petugas"): ?>                   
+                    <li><a href="<?= base_url('obat/pengambilan') ?>"><i class="fas fa-capsules"></i> Pengambilan Obat</a></li>
+                    <?php endif ?>
+                    <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
+                    <li><a href="<?= base_url('periksa/pembayaran') ?>"><i class="fas fa-money-bill-wave-alt"></i> Pembayaran</a></li>
+                    <?php endif ?>
+
+                    <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
                     <li><a href="<?= base_url('pasien') ?>"><i class="fa fa-user"></i> Pasien </a></li>
-                    <li><a href="<?= base_url('laporan') ?>"><i class="fa fa-book"></i> Laporan </a></li>
+                    <?php endif ?>                    
+                    <!-- <li><a href="<?= base_url('laporan') ?>"><i class="fa fa-book"></i> Laporan </a></li> -->
 
                 </ul>
             </div>
 
+            <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="apoteker"): ?>
             <div class="menu_section">
                 <h3>Data Master</h3>
                 <ul class="nav side-menu">
+                    <?php if ($this->session->userdata('level') =="administrator"): ?>
                     <li><a href="<?= base_url('user') ?>"><i class="fa fa-users"></i> User</a></li>
-                    <li><a href="<?= base_url('obat') ?>"><i class="fas fa-pills"></i> Obat</a></li>
+                    <?php endif ?>
 
+                    <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="apoteker"): ?>                        
+                        <li><a href="<?= base_url('obat') ?>"><i class="fas fa-pills"></i> Obat</a></li>
+                    <?php endif ?>
                 </ul>
             </div>
+            <?php endif ?>
             <div class="menu_section">
                 <h3>Setting</h3>
                 <ul class="nav side-menu">
@@ -87,11 +106,12 @@
                         <img src="https://colorlib.com/polygon/gentelella/images/img.jpg" alt=""><?= $this->session->userdata('username') ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:;"> Profile</a>
-                        <a class="dropdown-item" href="<?= base_url('setting/changepass') ?>">
-                            <span>Settings</span>
+                        <a class="dropdown-item" href="<?= base_url('setting/') ?>">
+                            <span>Profile</span>
                         </a>
-                        <a class="dropdown-item" href="javascript:;">Help</a>
+                        <a class="dropdown-item" href="<?= base_url('setting/changepass') ?>">
+                            <span>Ganti Password</span>
+                        </a>
                         <a class="dropdown-item" href="<?= base_url('logout') ?>"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a>
                     </div>
                 </li>

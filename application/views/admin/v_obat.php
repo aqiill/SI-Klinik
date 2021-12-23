@@ -23,9 +23,11 @@ if ($this->session->flashdata('gagal') != "") { ?>
         <div class="x_panel">
             <div class="x_title">
                 <h2>Data obat</h2>
+                <?php if ($this->session->userdata('level')!="dokter"): ?>
                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
                  <i class="fas fa-plus"></i>  Tambah obat
                 </button>
+                <?php endif ?>
                 <!-- <a href="#!" class="btn btn-sm btn-primary float-right"><i class="fas fa-plus"></i> Tambah obat</a> -->
                 <div class="clearfix"></div>
             </div>
@@ -44,7 +46,9 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                         <th>Stock Obat</th>
                                         <th>Merk</th>
                                         <th>Harga</th>
+                                        <?php if ($this->session->userdata('level')!="dokter"): ?>
                                         <th>Aksi</th>
+                                        <?php endif ?>
                                     </tr>
                                 </thead>
 
@@ -59,12 +63,14 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                         <td><?= $value->stok_obat ?></td>
                                         <td><?= $value->merk_obat ?></td>
                                         <td><?= $value->harga_obat ?></td>
+                                        <?php if ($this->session->userdata('level')!="dokter"): ?>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_obat ?>">
                                              <i class="fas fa-edit"></i> Edit
                                             </button>
                                             <a href="<?= base_url('obat/hapus/'.$value->id_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fas fa-trash"></i> Hapus</a>
                                         </td>
+                                        <?php endif ?>
                                     </tr>
 
 

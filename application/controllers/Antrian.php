@@ -8,14 +8,38 @@ class Antrian extends CI_Controller
         parent::__construct();
         $this->load->model(['m_pasien','m_antrian']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        $level = $this->session->userdata('level');
+
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
+        elseif ($this->session->userdata('username') == "") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
+        elseif ($level != "administrator" && $level != "petugas") {
+            $this->session->set_flashdata('gagal', 'Akses dilarang!');
+            redirect('beranda');
+        }
     }
 
     public function index()
     {
         $nik = $this->input->post('nik');
-
+        $level = $this->session->userdata('level');
         $cari = $this->m_pasien->detail_nik('pasien',$nik)->row();
-        $antrian = $this->m_antrian->data('antrian')->result();
+        
+        if ($level=="administrator") {
+            $antrian = $this->m_antrian->data('antrian')->result();
+        }else{
+            $antrian = $this->m_antrian->data_now('antrian')->result();            
+        }
 
         if (isset($_GET['cari'])) {
             if ($cari=="") {
@@ -138,26 +162,33 @@ class Antrian extends CI_Controller
 
 
         if ($valid->run() === false) {
-            $this->session->set_flashdata('gagal', validation_errors());
+            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan('pemeriksaan',$id)->num_rows();
 
-            $edit_status = array(
-                'status_antrian' => 'pemeriksaan',
-                'id_user' => $this->session->userdata('id_user')
-            );
+            if ($cek_pemeriksaan>0) {
+                $this->session->set_flashdata('gagal', 'Pasien sudah diperiksa oleh petugas!');
+                redirect(base_url('antrian'));
+            }
+            else{
 
-            $this->m_antrian->edit('antrian',$edit_status,$id);
+                $this->session->set_flashdata('gagal', validation_errors());
 
-            $data_pasien = $this->m_antrian->cek_data_pasien('antrian',$id)->row();
+                $edit_status = array(
+                    'status_antrian' => 'pemeriksaan',
+                    'id_user' => $this->session->userdata('id_user')
+                );
 
-            $data = array(
-                'title'        => 'Pemeriksaan',
-                'data'        => $data_pasien,
-                'isi'        => 'petugas/v_pemeriksaan',
-            );
-            // echo "<pre>";
-            // print_r($data_pasien);
-            // echo "</pre>";
-            $this->load->view('layout/wrapper', $data);
+                $this->m_antrian->edit('antrian',$edit_status,$id);
+
+                $data_pasien = $this->m_antrian->cek_data_pasien('antrian',$id)->row();
+
+                $data = array(
+                    'title'        => 'Pemeriksaan',
+                    'data'        => $data_pasien,
+                    'isi'        => 'petugas/v_pemeriksaan',
+                );
+                
+                $this->load->view('layout/wrapper', $data);
+            }
         } else {
 
             $i = $this->input;

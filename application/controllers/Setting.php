@@ -8,6 +8,24 @@ class Setting extends CI_Controller
         parent::__construct();
         $this->load->model(['m_user','m_login']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        $level = $this->session->userdata('level');
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
+        elseif ($this->session->userdata('username') == "") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
+        elseif ($level != "administrator" && $level != "dokter" && $level != "petugas" && $level != "apoteker") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
     }
 
     public function index()

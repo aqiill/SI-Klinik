@@ -56,8 +56,12 @@
                                                  <i class="fas fa-edit"></i> Detail
                                                 </button>
                                                 <?php if ($value->status_pemeriksaan=="petugas"){ ?>
-                                                    
-                                                <a href="<?= base_url('periksa/dokter/'.$value->id_pemeriksaan) ?>" class="btn btn-sm btn-warning"><i class="fas fa-user-md"></i> Tindakan Dokter</a>
+                                                    <?php if ($this->session->userdata('level') == "dokter"){ ?>
+                                                        <a href="<?= base_url('periksa/dokter/'.$value->id_pemeriksaan) ?>" class="btn btn-sm btn-warning"><i class="fas fa-user-md"></i> Tindakan Dokter</a>
+                                                    <?php }else{ ?>
+                                                        <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-user-md"></i> Tindakan Dokter</a>
+                                                    <?php } ?>
+
                                                 <?php } else{ ?>
                                                     <a href="#!" class="btn btn-sm btn-dark"><i class="fas fa-user-md"></i> Sedang Diperiksa</a>
                                                 <?php } ?>

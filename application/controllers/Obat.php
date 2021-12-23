@@ -8,6 +8,25 @@ class Obat extends CI_Controller
         parent::__construct();
         $this->load->model(['m_obat','m_pembayaran']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        $level = $this->session->userdata('level');
+
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
+        elseif ($this->session->userdata('username') == "") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
+        elseif ($level == "petugas") {
+            $this->session->set_flashdata('gagal', 'Akses dilarang!');
+            redirect('beranda');
+        }
     }
 
     public function index()
@@ -19,6 +38,40 @@ class Obat extends CI_Controller
             'isi'        => 'admin/v_obat',
         );
 
+        $this->load->view('layout/wrapper', $data);
+    }
+
+    public function pengambilan()
+    {
+        if ($this->session->userdata('level')!="administrator") {
+            $resep = $this->m_obat->resepobat_now('resepobat')->result();
+        }
+        else{
+            $resep = $this->m_obat->resepobat('resepobat')->result();
+        }
+
+        if ($this->uri->segment(3) !="") {
+            $id_resep = $this->uri->segment(3);
+            $detail_obat = $this->m_obat->detail_obat('resepobat',$id_resep)->result();
+            $data = array(
+                'title'        => 'Pengambilan Obat',
+                'resep'        => $resep,
+                'detail_obat'        => $detail_obat,
+                'isi'        => 'apoteker/v_pengambilan_obat',
+            );
+        }
+        else{
+            $data = array(
+                'title'        => 'Pengambilan Obat',
+                'resep'        => $resep,
+                'isi'        => 'apoteker/v_pengambilan_obat',
+            );
+        }
+
+
+        // echo "<pre>";
+        // print_r($resep);
+        // echo "<pre>";
         $this->load->view('layout/wrapper', $data);
     }
 

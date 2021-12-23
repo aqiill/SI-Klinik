@@ -8,6 +8,25 @@ class Pasien extends CI_Controller
         parent::__construct();
         $this->load->model(['m_pasien']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        $level = $this->session->userdata('level');
+
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
+        elseif ($this->session->userdata('username') == "") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
+        elseif ($level != "administrator" && $level != "petugas") {
+            $this->session->set_flashdata('gagal', 'Akses dilarang!');
+            redirect('beranda');
+        }
     }
 
     public function index()

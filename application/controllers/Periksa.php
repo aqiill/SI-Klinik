@@ -6,8 +6,27 @@ class Periksa extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['m_periksa','m_obat']);
+        $this->load->model(['m_periksa','m_obat','m_antrian','m_pembayaran']);
         $this->load->helper(array('form', 'url'));
+        $this->cek_login();
+    }
+
+    public function cek_login()
+    {
+        $level = $this->session->userdata('level');
+
+        if ($this->session->userdata('nik') == "") {
+            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
+            redirect('setting');
+        }
+        elseif ($this->session->userdata('username') == "") {
+            $this->session->set_flashdata('gagal', 'Silahkan Login!');
+            redirect('login');
+        }
+        elseif ($level == "apoteker") {
+            $this->session->set_flashdata('gagal', 'Akses dilarang!');
+            redirect('beranda');
+        }
     }
 
     public function index()
@@ -30,6 +49,63 @@ class Periksa extends CI_Controller
         );
 
         $this->load->view('layout/wrapper', $data);
+
+
+    }
+
+    public function pembayaran()
+    {
+        $level = $this->session->userdata('level');
+        $id_user = $this->session->userdata('id_user');
+        if ($level !='administrator') {
+            $pembayaran = $this->m_pembayaran->data_pembayaran_petugas('pembayaran',$id_user)->result();
+     
+            $data = array(
+                'title'        => 'Pembayaran',
+                'pembayaran'        => $pembayaran,
+                'isi'        => 'petugas/v_pembayaran'
+            );
+        }
+        else{
+            $pembayaran = $this->m_pembayaran->data('pembayaran')->result();
+     
+            $data = array(
+                'title'        => 'Pembayaran',
+                'pembayaran'        => $pembayaran,
+                'isi'        => 'petugas/v_pembayaran'
+            );
+        }
+        $this->load->view('layout/wrapper', $data);
+
+
+    }
+
+    public function proses_bayar($id_antrian,$status,$id)
+    {
+        if ($id_antrian=="" || $status=="" || $id=="") show_404();
+
+        if ($status=="y") {
+            $status_bayar = "lunas";
+            $status_antrian = "selesai";
+        }
+        elseif ($status=="n") {
+            $status_bayar = "pending";
+            $status_antrian = "pemeriksaan";
+        }
+
+        $data = array(
+            'id_user' => $this->session->userdata('id_user'),
+            'status_bayar' => $status_bayar
+        );
+        $this->m_pembayaran->bayar('pembayaran', $data,$id);
+
+        $data = array(
+            'status_antrian' => $status_antrian
+        );
+        $this->m_antrian->edit('antrian', $data,$id_antrian);
+        
+        $this->session->set_flashdata('suskes', 'Status Pembayaran diubah!');
+        redirect(base_url('periksa/pembayaran'));
 
 
     }
@@ -62,23 +138,33 @@ class Periksa extends CI_Controller
 
         
         if ($valid->run() === false) {
-            $this->session->set_flashdata('gagal', validation_errors());
 
-            $edit_status = array(
-                'status_pemeriksaan' => 'dokter'
-            );
+            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan_dokter('rekammedis',$id)->num_rows();
 
-            $this->m_periksa->edit('pemeriksaan',$edit_status,$id);
+            if ($cek_pemeriksaan>0) {
+                $this->session->set_flashdata('gagal', 'Pasien sudah diperiksa oleh dokter!');
+                redirect(base_url('periksa'));
+            }
+            else{
+                $this->session->set_flashdata('gagal', validation_errors());
 
-            $pasien = $this->m_periksa->cek_pasien('pemeriksaan',$id)->row();
+                $edit_status = array(
+                    'status_pemeriksaan' => 'dokter'
+                );
 
-            $data = array(
-                'title'        => 'Pemeriksaan',
-                'pasien'        => $pasien,
-                'isi'        => 'dokter/v_tindakan',
-            );
+                $this->m_periksa->edit('pemeriksaan',$edit_status,$id);
 
-            $this->load->view('layout/wrapper', $data);
+                $pasien = $this->m_periksa->cek_pasien('pemeriksaan',$id)->row();
+
+                $data = array(
+                    'title'        => 'Pemeriksaan',
+                    'pasien'        => $pasien,
+                    'isi'        => 'dokter/v_tindakan',
+                );
+
+                $this->load->view('layout/wrapper', $data);
+            }
+
         } else {
 
             $i = $this->input;

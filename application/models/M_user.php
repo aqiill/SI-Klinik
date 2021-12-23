@@ -20,6 +20,11 @@ class M_user extends CI_Model
     {
         return $this->db->get_where($table, array('id_user' => $id));
     }
+
+    public function jlm_dokter($table)
+    {
+        return $this->db->get_where($table, array('level' => "dokter"));
+    }
     
     public function tambah($table,$data)
     {
