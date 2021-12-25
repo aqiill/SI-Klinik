@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php if ($this->session->flashdata('sukses') != ""): ?>
     <div class="row">
         <div class="col-12">
@@ -22,7 +23,7 @@
             <div class="x_title">
                 <h2>Data Pasien</h2>
                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                 <i class="fas fa-plus"></i>  Tambah Pasien Baru
+                 <i class="fa fa-plus" aria-hidden="true"></i>  Tambah Pasien Baru
                 </button>
                 <div class="clearfix"></div>
             </div>
@@ -44,17 +45,19 @@
 
                                 <tbody>
                                     <?php $no=1; foreach ($pasien as $value): ?>
+                                        
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $value->nik_pasien ?></td>
-                                            <td><?= $value->nama_pasien ?></td>
+                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->id_pasien) ?>"><?= $value->nik_pasien ?></a></td>
+                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->id_pasien) ?>"><?= $value->nama_pasien ?></a></td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_pasien ?>">
-                                                 <i class="fas fa-edit"></i> Detail
+                                                 <i class="fa fa-info" aria-hidden="true"></i> Detail
                                                 </button>
-                                                <a href="<?= base_url('pasien/hapus/'.$value->id_pasien) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fas fa-trash"></i> Hapus</a>
+                                                <a href="<?= base_url('pasien/hapus/'.$value->id_pasien) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                             </td>
                                         </tr>
+                                        
 
 
 

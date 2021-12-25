@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php
 if ($this->session->flashdata('sukses') != "") { ?>
     <div class="row">
@@ -24,7 +25,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
             <div class="x_title">
                 <h2>Data User</h2>
                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                 <i class="fas fa-plus"></i>  Tambah User
+                 <i class="fa fa-plus" aria-hidden="true"></i>  Tambah User
                 </button>
                 <!-- <a href="#!" class="btn btn-sm btn-primary float-right"><i class="fas fa-plus"></i> Tambah User</a> -->
                 <div class="clearfix"></div>
@@ -55,9 +56,9 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                         <td><?= $value->level ?></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_user ?>">
-                                             <i class="fas fa-edit"></i> Edit
+                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                             </button>
-                                            <a href="<?= base_url('user/hapus/'.$value->id_user) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fas fa-trash"></i> Hapus</a>
+                                            <a href="<?= base_url('user/hapus/'.$value->id_user) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                         </td>
                                     </tr>
 

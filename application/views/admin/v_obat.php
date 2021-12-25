@@ -1,3 +1,5 @@
+
+<div class="clearfix"></div>
 <?php
 if ($this->session->flashdata('sukses') != "") { ?>
     <div class="row">
@@ -25,7 +27,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
                 <h2>Data obat</h2>
                 <?php if ($this->session->userdata('level')!="dokter"): ?>
                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                 <i class="fas fa-plus"></i>  Tambah obat
+                 <i class="fa fa-plus" aria-hidden="true"></i>  Tambah obat
                 </button>
                 <?php endif ?>
                 <!-- <a href="#!" class="btn btn-sm btn-primary float-right"><i class="fas fa-plus"></i> Tambah obat</a> -->
@@ -66,9 +68,9 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                         <?php if ($this->session->userdata('level')!="dokter"): ?>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_obat ?>">
-                                             <i class="fas fa-edit"></i> Edit
+                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                             </button>
-                                            <a href="<?= base_url('obat/hapus/'.$value->id_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fas fa-trash"></i> Hapus</a>
+                                            <a href="<?= base_url('obat/hapus/'.$value->id_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                         </td>
                                         <?php endif ?>
                                     </tr>

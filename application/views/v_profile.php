@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <div class="row">
 	<div class="col-12">
 

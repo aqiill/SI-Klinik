@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Des 2021 pada 17.12
+-- Waktu pembuatan: 25 Des 2021 pada 06.21
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -36,18 +36,6 @@ CREATE TABLE `antrian` (
   `status_antrian` enum('antrian','pemeriksaan','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `antrian`
---
-
-INSERT INTO `antrian` (`id_antrian`, `no_antrian`, `id_pasien`, `id_user`, `tgl_checkup`, `status_antrian`) VALUES
-(4, 'K0001', 2, 6, '2021-12-21', 'pemeriksaan'),
-(9, 'K0002', 1, 7, '2021-12-21', 'pemeriksaan'),
-(11, 'K0003', 3, 6, '2021-12-22', 'antrian'),
-(12, 'K0004', 1, 7, '2021-12-23', 'antrian'),
-(13, 'K0005', 6, 7, '2021-12-23', 'selesai'),
-(14, 'K0006', 7, 6, '2021-12-22', 'pemeriksaan');
-
 -- --------------------------------------------------------
 
 --
@@ -65,14 +53,6 @@ CREATE TABLE `obat` (
   `harga_obat` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `obat`
---
-
-INSERT INTO `obat` (`id_obat`, `masa_berlaku`, `jenis_obat`, `nama_obat`, `tahun_produksi`, `stok_obat`, `merk_obat`, `harga_obat`) VALUES
-(2, '2023-10-24', 'Salep', 'Chorampenicol', '2021-12-01', 249, 'Kalmicetine', 25000),
-(3, '2022-04-01', 'Keras', 'Paracetamol', '2021-12-02', 97, 'Inzana', 15000);
-
 -- --------------------------------------------------------
 
 --
@@ -87,18 +67,6 @@ CREATE TABLE `pasien` (
   `alamat_pasien` text NOT NULL,
   `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `pasien`
---
-
-INSERT INTO `pasien` (`id_pasien`, `nik_pasien`, `nama_pasien`, `umur_pasien`, `alamat_pasien`, `jenis_kelamin`) VALUES
-(1, '3020101010101293', 'Agus Hartono', 20, 'Bandung', 'laki-laki'),
-(2, '3012020102939401', 'Julia', 25, 'Cimahi', 'perempuan'),
-(3, '3013404059681923', 'Heri', 30, 'Tangerang', 'laki-laki'),
-(4, '3013404052681923', 'Joko', 20, 'Bandung', 'laki-laki'),
-(6, '1376010205200100', 'Rahman', 20, 'Padangdata', 'laki-laki'),
-(7, '3204105807990004', 'Ani Dianasari', 22, 'Kp. Mencut Jl. Nanjung', 'perempuan');
 
 -- --------------------------------------------------------
 
@@ -115,15 +83,6 @@ CREATE TABLE `pembayaran` (
   `status_bayar` enum('pending','lunas') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `pembayaran`
---
-
-INSERT INTO `pembayaran` (`id_pembayaran`, `id_rekam_medis`, `id_user`, `tgl_bayar`, `total_bayar`, `status_bayar`) VALUES
-(1, 7, 8, '2021-12-22', 115000, 'pending'),
-(2, 8, 7, '2021-12-23', 155000, 'lunas'),
-(3, 9, 8, '2021-12-23', 100000, 'pending');
-
 -- --------------------------------------------------------
 
 --
@@ -138,16 +97,6 @@ CREATE TABLE `pemeriksaan` (
   `keluhan` text NOT NULL,
   `status_pemeriksaan` enum('petugas','dokter') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `pemeriksaan`
---
-
-INSERT INTO `pemeriksaan` (`id_pemeriksaan`, `id_antrian`, `tekanan_darah`, `suhu_badan`, `keluhan`, `status_pemeriksaan`) VALUES
-(2, 4, '90/60', 36, 'Pilek', 'dokter'),
-(3, 9, '90/60', 36, 'Pilek', 'petugas'),
-(4, 13, '120', 36, 'Pilek', 'dokter'),
-(6, 14, '110', 36, ':Pilek', 'dokter');
 
 -- --------------------------------------------------------
 
@@ -164,15 +113,6 @@ CREATE TABLE `rekammedis` (
   `rujukan` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `rekammedis`
---
-
-INSERT INTO `rekammedis` (`id_rekam_medis`, `id_pemeriksaan`, `id_user`, `diagnosa`, `tindakan`, `rujukan`) VALUES
-(7, 2, 8, 'Flu biasa', 'perban', ''),
-(8, 4, 8, 'Flu', 'Terapi', ''),
-(9, 6, 8, 'Flu', 'Terapi', '');
-
 -- --------------------------------------------------------
 
 --
@@ -186,15 +126,6 @@ CREATE TABLE `resepobat` (
   `jumlah_obat` int(10) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `resepobat`
---
-
-INSERT INTO `resepobat` (`id_resep_obat`, `id_rekam_medis`, `id_obat`, `jumlah_obat`, `keterangan`) VALUES
-(13, 8, 2, 1, '2x sehari'),
-(14, 8, 3, 2, '1x sehari'),
-(15, 7, 3, 1, '1x sehari');
 
 -- --------------------------------------------------------
 
@@ -217,11 +148,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nik`, `username`, `password`, `nama_user`, `alamat`, `level`) VALUES
-(4, '1971012310010008', 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227', 'admin', 'padang', 'administrator'),
-(6, '1376012310001000', 'aqiill', '5a919f4b9e99f35bf01f8b56a7cad352d9d693f6', 'Aqil Rahman', 'Padang Data', 'petugas'),
-(7, '1971010010010008', 'faizal', '4463171ed285270b4d325f69f8217b8471e828ce', 'Faizal', 'Bandung', 'petugas'),
-(8, '1376010010002002', 'catur', 'e8601eb22ba7f55f8d54a109dc6d1792000a43fe', 'Caturiani', 'Tasik', 'dokter'),
-(9, '1234567899874561', 'apoteker', '8e30c3e6d50e5d7c02e7eaffa5954b04d4a3afaf', 'Apoteker', 'Padang', 'apoteker');
+(1, '1376010000000001', 'admin', '9a41ec527fe60f7f97c93f8c444c8e8d70a15b82', 'admin', 'Indonesia', 'administrator'),
+(2, '', 'aqiill', '5a919f4b9e99f35bf01f8b56a7cad352d9d693f6', '', '', 'petugas'),
+(3, '', 'faizalabdulv', '68b8f54d7f97622ebd584b2890ddc65844dd94ec', '', '', 'dokter'),
+(4, '', 'crumybrulee', 'e8601eb22ba7f55f8d54a109dc6d1792000a43fe', '', '', 'apoteker');
 
 --
 -- Indexes for dumped tables
@@ -292,49 +222,49 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `antrian`
 --
 ALTER TABLE `antrian`
-  MODIFY `id_antrian` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_antrian` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id_obat` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_obat` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pasien` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembayaran` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  MODIFY `id_pemeriksaan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pemeriksaan` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  MODIFY `id_rekam_medis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_rekam_medis` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `resepobat`
 --
 ALTER TABLE `resepobat`
-  MODIFY `id_resep_obat` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_resep_obat` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

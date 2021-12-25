@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php if ($this->session->flashdata('sukses') != ""): ?>
     <div class="row">
         <div class="col-12">
@@ -50,20 +51,20 @@
                                             <td><?= $value->nama_pasien ?></td>
                                             <td><?= $value->nama_user ?></td>
                                             <td><?= $value->keluhan ?></td>
-                                            <td>Oleh: <i class="fas fa-user-nurse"></i> <?= ucwords($value->status_pemeriksaan) ?></td>
+                                            <td>Oleh: <i class="fa fa-user-md" aria-hidden="true"></i> <?= ucwords($value->status_pemeriksaan) ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit<?= $value->id_pemeriksaan ?>">
-                                                 <i class="fas fa-edit"></i> Detail
+                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Detail
                                                 </button>
                                                 <?php if ($value->status_pemeriksaan=="petugas"){ ?>
                                                     <?php if ($this->session->userdata('level') == "dokter"){ ?>
-                                                        <a href="<?= base_url('periksa/dokter/'.$value->id_pemeriksaan) ?>" class="btn btn-sm btn-warning"><i class="fas fa-user-md"></i> Tindakan Dokter</a>
+                                                        <a href="<?= base_url('periksa/dokter/'.$value->id_pemeriksaan) ?>" class="btn btn-sm btn-warning"><i class="fa fa-user-md" aria-hidden="true"></i> Tindakan Dokter</a>
                                                     <?php }else{ ?>
-                                                        <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-user-md"></i> Tindakan Dokter</a>
+                                                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-user-md" aria-hidden="true"></i> Tindakan Dokter</a>
                                                     <?php } ?>
 
                                                 <?php } else{ ?>
-                                                    <a href="#!" class="btn btn-sm btn-dark"><i class="fas fa-user-md"></i> Sedang Diperiksa</a>
+                                                    <a href="#!" class="btn btn-sm btn-dark"><i class="fa fa-user-md" aria-hidden="true"></i> Sedang Diperiksa</a>
                                                 <?php } ?>
                                             </td>
                                         </tr>

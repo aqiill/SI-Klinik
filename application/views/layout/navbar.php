@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="<?= base_url('beranda') ?>" class="site_title"><i class="fa fa-paw"></i> <span>SI Klinik</span></a>
+            <a href="<?= base_url('beranda') ?>" class="site_title"><i class="fa fa-hospital-o" aria-hidden="true"></i> <span>SI Klinik</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -9,7 +9,7 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="https://colorlib.com/polygon/gentelella/images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="https://www.gravatar.com/avatar/<?= md5('aqilrahman@gmail.com') ?>?s=100&d=mm" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
@@ -27,16 +27,16 @@
                 <ul class="nav side-menu">
                     <li><a href="<?= base_url('beranda') ?>"><i class="fa fa-home"></i> Beranda </a></li>
                     <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
-                    <li><a href="<?= base_url('antrian') ?>"><i class="fas fa-grip-lines"></i> Antrian </a></li>
+                    <li><a href="<?= base_url('antrian') ?>"><i class="fa fa-code-fork" aria-hidden="true"></i> Antrian </a></li>
                     <?php endif ?>
                     <?php if ($this->session->userdata('level') !="apoteker"): ?>
-                    <li><a href="<?= base_url('periksa') ?>"><i class="fas fa-stethoscope"></i> Pemeriksaan </a></li>
+                    <li><a href="<?= base_url('periksa') ?>"><i class="fa fa-user-md" aria-hidden="true"></i> Pemeriksaan </a></li>
                     <?php endif ?>
                     <?php if ($this->session->userdata('level') !="petugas"): ?>                   
-                    <li><a href="<?= base_url('obat/pengambilan') ?>"><i class="fas fa-capsules"></i> Pengambilan Obat</a></li>
+                    <li><a href="<?= base_url('obat/pengambilan') ?>"><i class="fa fa-circle" aria-hidden="true"></i> Pengambilan Obat</a></li>
                     <?php endif ?>
                     <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
-                    <li><a href="<?= base_url('periksa/pembayaran') ?>"><i class="fas fa-money-bill-wave-alt"></i> Pembayaran</a></li>
+                    <li><a href="<?= base_url('periksa/pembayaran') ?>"><i class="fa fa-usd" aria-hidden="true"></i> Pembayaran</a></li>
                     <?php endif ?>
 
                     <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="petugas"): ?>
@@ -56,7 +56,7 @@
                     <?php endif ?>
 
                     <?php if ($this->session->userdata('level') =="administrator" || $this->session->userdata('level') =="apoteker"): ?>                        
-                        <li><a href="<?= base_url('obat') ?>"><i class="fas fa-pills"></i> Obat</a></li>
+                        <li><a href="<?= base_url('obat') ?>"><i class="fa fa-circle" aria-hidden="true"></i> Obat</a></li>
                     <?php endif ?>
                 </ul>
             </div>
@@ -66,7 +66,7 @@
                 <ul class="nav side-menu">
                     <li><a href="<?= base_url('setting/') ?>"><i class="fa fa-user"></i> Profile </a></li>
                     <li><a href="<?= base_url('setting/changepass') ?>"><i class="fa fa-key"></i> Ganti Password </a></li>
-                    <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out-alt"></i> Logout </a></li>
+                    <li><a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a></li>
 
                 </ul>
             </div>
@@ -103,7 +103,7 @@
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="https://colorlib.com/polygon/gentelella/images/img.jpg" alt=""><?= $this->session->userdata('username') ?>
+                        <img src="https://www.gravatar.com/avatar/<?= md5('aqilrahman@gmail.com') ?>?s=100&d=mm" alt=""><?= $this->session->userdata('username') ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?= base_url('setting/') ?>">

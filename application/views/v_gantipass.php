@@ -1,7 +1,8 @@
+<div class="clearfix"></div>
 <form action="<?= base_url('setting/changepass') ?>" method="POST" class="needs-validation" novalidate>
 
     <?php if ($this->session->flashdata('gagal') != "") { ?>
-        <div class="form-group mt-5">
+        <div class="form-group">
             <div class="alert alert-danger" role="alert">
                 <?= $this->session->flashdata('gagal') ?>
             </div>

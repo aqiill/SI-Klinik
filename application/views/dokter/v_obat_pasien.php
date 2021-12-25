@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php
 if ($this->session->flashdata('sukses') != "") { ?>
     <div class="row">
@@ -54,7 +55,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
             <div class="x_title">
                 <h2>Daftar Obat Pasien</h2>
                 <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#exampleModalLong">
-                 <i class="fas fa-plus"></i>  Tambah Obat Pasien
+                 <i class="fa fa-plus" aria-hidden="true"></i>  Tambah Obat Pasien
                 </button>
                 <div class="clearfix"></div>
             </div>           
@@ -87,7 +88,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                             <td><?= number_format($value->harga_obat*$value->jumlah_obat) ?></td>
                                             <td><?= $value->keterangan ?></td>
                                             <td>
-                                                <a href="<?= base_url('obat/hapus_resep/'.$value->id_resep_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fas fa-trash"></i> Hapus</a>
+                                                <a href="<?= base_url('obat/hapus_resep/'.$value->id_resep_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

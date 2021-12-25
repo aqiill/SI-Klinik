@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php
 if ($this->session->flashdata('sukses') != "") { ?>
     <div class="row">
@@ -71,7 +72,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
                             <h2>Detail Obat Pasien</h2>
                             <?php if ($this->uri->segment(3) !=""){ ?>
                                 <?php if ($this->session->userdata('level') =="dokter" ||$this->session->userdata('level') =="administrator" ): ?>
-                                <a href="<?= base_url('obat/pasien/'.$detail_obat[0]->id_rekam_medis) ?>" class="btn btn-sm btn-primary float-right"><i class="fas fa-plus"></i> Tambah obat</a>
+                                <a href="<?= base_url('obat/pasien/'.$detail_obat[0]->id_rekam_medis) ?>" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus" aria-hidden="true"></i> Tambah obat</a>
                                 <?php endif ?>
                             <?php } ?>
                             <div class="clearfix"></div>

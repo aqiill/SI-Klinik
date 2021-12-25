@@ -19,6 +19,17 @@ class M_pasien extends CI_Model
         return $this->db->get();
     }
 
+    public function rekam_medis($table,$id)
+    {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join('antrian', $table.'.id_pasien = antrian.id_pasien');
+        $this->db->join('pemeriksaan', 'antrian.id_antrian = pemeriksaan.id_antrian');
+        $this->db->join('rekammedis', 'pemeriksaan.id_pemeriksaan = rekammedis.id_pemeriksaan');
+        $this->db->where($table.'.id_pasien', $id);
+        return $this->db->get();
+    }
+
     public function detail($table,$id)
     {
         return $this->db->get_where($table, array('id_pasien' => $id));

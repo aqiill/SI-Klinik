@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <div class="card">
 	<div class="card-header">
 		Pemeriksaan Petugas

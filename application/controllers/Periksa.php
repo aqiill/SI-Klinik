@@ -37,6 +37,9 @@ class Periksa extends CI_Controller
         if ($level=="petugas") {
             $periksa = $this->m_periksa->data_petugas('pemeriksaan',$id_user)->result();
         }
+        elseif ($level =="dokter" ) {
+            $periksa = $this->m_periksa->data_dokter('pemeriksaan')->result();            
+        }
         elseif ($level =="administrator" || $level =="dokter" ) {
             $periksa = $this->m_periksa->data('pemeriksaan')->result();            
         }

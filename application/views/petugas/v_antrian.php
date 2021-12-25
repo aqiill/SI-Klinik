@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <?php if ($this->session->flashdata('sukses') != ""): ?>
     <div class="row">
         <div class="col-12">

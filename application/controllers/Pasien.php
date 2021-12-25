@@ -41,6 +41,21 @@ class Pasien extends CI_Controller
         $this->load->view('layout/wrapper', $data);
     }
 
+    public function rekam_medis($id)
+    {
+        if ($id=="") show_404();
+
+        $pasien = $this->m_pasien->detail('pasien',$id)->row();
+        $rekam_medis = $this->m_pasien->rekam_medis('pasien',$id)->result();
+        $data = array(
+            'title'        => 'Rekam Medis',
+            'pasien'        => $pasien,
+            'rekam_medis'        => $rekam_medis,
+        );
+
+        $this->load->view('admin/v_rekam_medis', $data);
+    }
+
 
     public function tambah()
     {

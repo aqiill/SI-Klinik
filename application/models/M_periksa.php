@@ -41,6 +41,18 @@ class M_periksa extends CI_Model
         return $this->db->get();
     }
 
+    public function data_dokter($table)
+    {
+        $this->db->select('nama_pasien,umur_pasien,jenis_kelamin,suhu_badan,keluhan,tekanan_darah,no_antrian,nama_user,id_pemeriksaan,status_pemeriksaan');
+        $this->db->from($table);
+        $this->db->join('antrian', $table.'.id_antrian = antrian.id_antrian');
+        $this->db->join('pasien', 'pasien.id_pasien = antrian.id_pasien');
+        $this->db->join('user', 'user.id_user = antrian.id_user');
+        $this->db->order_by('antrian.id_antrian', 'ASC');
+        $this->db->where('antrian.tgl_checkup', date('Y-m-d'));
+        return $this->db->get();
+    }
+
     public function cek_pasien($table,$id)
     {
         $this->db->select('*');
