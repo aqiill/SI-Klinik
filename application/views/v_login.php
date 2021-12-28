@@ -55,17 +55,17 @@
     <meta property="og:image:height" content="630">    
 
     <style type="text/css">
-        body{
+        /*body{
             background-image: url('https://wallpaperaccess.com/full/1282794.jpg');
             position: relative;
             background-size: cover;
             background-repeat: no-repeat;
-        }
+        }*/
 
     </style>
 </head>
 
-<body class="">
+<body class="login">
     <div>
         <a class="hiddenanchor" id="signin"></a>
 

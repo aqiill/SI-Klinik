@@ -14,11 +14,7 @@ class Setting extends CI_Controller
     public function cek_login()
     {
         $level = $this->session->userdata('level');
-        if ($this->session->userdata('nik') == "") {
-            $this->session->set_flashdata('sukses', 'Lengkapi Profile Anda!');
-            redirect('setting');
-        }
-        elseif ($this->session->userdata('username') == "") {
+        if ($this->session->userdata('username') == "") {
             $this->session->set_flashdata('gagal', 'Silahkan Login!');
             redirect('login');
         }
