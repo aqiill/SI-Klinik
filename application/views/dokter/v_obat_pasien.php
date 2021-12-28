@@ -32,22 +32,22 @@ if ($this->session->flashdata('gagal') != "") { ?>
                     <tr>
                         <td>NIK</td>
                         <td>:</td>
-                        <td><?= $pasien->nik_pasien ?></td>
+                        <td><?= $pasien->NIK_PASIEN ?></td>
                     </tr>
                     <tr>
                         <td>Nama Pasien</td>
                         <td>:</td>
-                        <td><?= $pasien->nama_pasien ?></td>
+                        <td><?= $pasien->NAMA_PASIEN ?></td>
                     </tr>
                     <tr>
                         <td>Usia</td>
                         <td>:</td>
-                        <td><?= $pasien->umur_pasien ?></td>
+                        <td><?= $pasien->UMUR_PASIEN ?></td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td><?= $pasien->jenis_kelamin ?></td>
+                        <td><?= $pasien->JENIS_KELAMIN ?></td>
                     </tr>
                 </table>
                 <div class="clearfix"></div>
@@ -82,13 +82,13 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                     <?php $no=1; foreach ($obat as $value): ?>                                        
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td><?= $value->nama_obat ?></td>
-                                            <td><?= $value->jumlah_obat ?></td>
-                                            <td><?= number_format($value->harga_obat) ?></td>
-                                            <td><?= number_format($value->harga_obat*$value->jumlah_obat) ?></td>
-                                            <td><?= $value->keterangan ?></td>
+                                            <td><?= $value->NAMA_OBAT ?></td>
+                                            <td><?= $value->JUMLAH_OBAT ?></td>
+                                            <td><?= number_format($value->HARGA_OBAT) ?></td>
+                                            <td><?= number_format($value->HARGA_OBAT*$value->JUMLAH_OBAT) ?></td>
+                                            <td><?= $value->KETERANGAN ?></td>
                                             <td>
-                                                <a href="<?= base_url('obat/hapus_resep/'.$value->id_resep_obat) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
+                                                <a href="<?= base_url('obat/hapus_resep/'.$value->ID_RESEP_OBAT) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
@@ -108,7 +108,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="<?= base_url('obat/tambah_obat_pasien/'.$pasien->id_rekam_medis) ?>" method="POST" class="needs-validation" novalidate>
+    <form action="<?= base_url('obat/tambah_obat_pasien/'.$pasien->ID_REKAM_MEDIS) ?>" method="POST" class="needs-validation" novalidate>
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pasien Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -122,7 +122,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
             <select name="obat" class="form-control" id="obat" required>
               <option></option>
               <?php foreach ($list_obat as $value): ?>
-                  <option value="<?= $value->id_obat ?>"><?= $value->nama_obat ?> - Sisa Stok <?= $value->stok_obat ?></option>
+                  <option value="<?= $value->ID_OBAT ?>"><?= $value->NAMA_OBAT ?> - Sisa Stok <?= $value->STOK_OBAT ?></option>
               <?php endforeach ?>
             </select>
             <div class="invalid-feedback">

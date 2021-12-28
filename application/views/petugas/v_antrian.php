@@ -47,31 +47,31 @@
                     <tr>
                         <td>NIK</td>
                         <td>:</td>
-                        <td><?= $cari->nik_pasien; ?></td>
+                        <td><?= $cari->NIK_PASIEN; ?></td>
                     </tr>
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td><?= $cari->nama_pasien; ?></td>
+                        <td><?= $cari->NAMA_PASIEN; ?></td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td><?= $cari->jenis_kelamin; ?></td>
+                        <td><?= $cari->JENIS_KELAMIN; ?></td>
                     </tr>
                     <tr>
                         <td>Usia</td>
                         <td>:</td>
-                        <td><?= $cari->umur_pasien; ?></td>
+                        <td><?= $cari->UMUR_PASIEN; ?></td>
                     </tr>
                     <tr>
                         <td>Alamat</td>
                         <td>:</td>
-                        <td><?= $cari->alamat_pasien; ?></td>
+                        <td><?= $cari->ALAMAT_PASIEN; ?></td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <a href="<?= base_url('antrian/tambah/'.$cari->id_pasien) ?>" class="btn btn-warning btn-sm mt-3">Tambah ke antrian <i class="fas fa-arrow-right"></i></a>
+                            <a href="<?= base_url('antrian/tambah/'.$cari->ID_PASIEN) ?>" class="btn btn-warning btn-sm mt-3">Tambah ke antrian <i class="fas fa-arrow-right"></i></a>
                         </td>
                     </tr>
                 </table>
@@ -113,19 +113,19 @@
                                     <?php foreach ($antrian as $value): ?>
                                         
                                         <tr>
-                                            <td><?= $value->no_antrian ?></td>
+                                            <td><?= $value->NO_ANTRIAN ?></td>
                                             <td>
-                                                <a href="<?= base_url('antrian/periksa/'.$value->id_antrian) ?>">
-                                                <?= $value->nik_pasien ?>
+                                                <a href="<?= base_url('antrian/periksa/'.$value->ID_ANTRIAN) ?>">
+                                                <?= $value->NIK_PASIEN ?>
                                                 </a>                                                
                                             </td>
-                                            <td><?= $value->nama_pasien ?></td>
+                                            <td><?= $value->NAMA_PASIEN ?></td>
                                             <td>
-                                                <?php if ($value->status_antrian=="antrian"){ ?>
-                                                    <a href="<?= base_url('antrian/periksa/'.$value->id_antrian) ?>" class="btn btn-sm btn-dark">Dalam Antrian</a>
-                                                <?php }elseif ($value->status_antrian=="pemeriksaan") { ?>
+                                                <?php if ($value->STATUS_ANTRIAN=="antrian"){ ?>
+                                                    <a href="<?= base_url('antrian/periksa/'.$value->ID_ANTRIAN) ?>" class="btn btn-sm btn-dark">Dalam Antrian</a>
+                                                <?php }elseif ($value->STATUS_ANTRIAN=="pemeriksaan") { ?>
                                                     <button class="btn btn-warning btn-sm">Pemeriksaan</button>
-                                                <?php }elseif ($value->status_antrian=="selesai") { ?>
+                                                <?php }elseif ($value->STATUS_ANTRIAN=="selesai") { ?>
                                                     <button class="btn btn-success btn-sm">Selesai</button>
                                                 <?php } ?>
                                             </td>

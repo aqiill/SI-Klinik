@@ -33,12 +33,12 @@ class Antrian extends CI_Controller
     {
         $nik = $this->input->post('nik');
         $level = $this->session->userdata('level');
-        $cari = $this->m_pasien->detail_nik('pasien',$nik)->row();
+        $cari = $this->m_pasien->detail_nik('PASIEN',$nik)->row();
         
         if ($level=="administrator") {
-            $antrian = $this->m_antrian->data('antrian')->result();
+            $antrian = $this->m_antrian->data('ANTRIAN')->result();
         }else{
-            $antrian = $this->m_antrian->data_now('antrian')->result();            
+            $antrian = $this->m_antrian->data_now('ANTRIAN')->result();            
         }
 
         if (isset($_GET['cari'])) {
@@ -55,6 +55,9 @@ class Antrian extends CI_Controller
             'isi'        => 'petugas/v_antrian',
         );
 
+        // echo "<pre>";
+        // print_r($antrian);
+        // echo "</pre>";
         $this->load->view('layout/wrapper', $data);
 
 
@@ -65,19 +68,19 @@ class Antrian extends CI_Controller
     {
         if ($id=="") show_404();
 
-        $cek = $this->m_antrian->cek('antrian')->row();
+        $cek = $this->m_antrian->cek('ANTRIAN')->row();
 
-        if ($cek->no_antrian=="") {
+        if ($cek->NO_ANTRIAN=="") {
             $no_antrian = 'K0001';
         }
         else{
-            $urut = (int) substr($cek->no_antrian, 1, 4);
+            $urut = (int) substr($cek->NO_ANTRIAN, 1, 4);
             $urut++;
             $no_antrian = sprintf("K%04s", $urut);
         }
 
-        $today = date('Y-m-d');
-        $cek_today = $this->m_antrian->cek_pasien('antrian',$id,$today)->num_rows();
+        $today = strtoupper(date('d-M-y'));
+        $cek_today = $this->m_antrian->cek_pasien('ANTRIAN',$id,$today)->num_rows();
 
         if ($cek_today>0) {
             $this->session->set_flashdata('cari_pasien', 'Pasien Tersebut Sudah Terdaftar Hari Ini!');
@@ -85,14 +88,14 @@ class Antrian extends CI_Controller
         }
         else{
             $data_antrian = array(
-                'no_antrian'        => $no_antrian,
-                'id_pasien'        => $id,
-                'id_user'        => $this->session->userdata('id_user'),
-                'tgl_checkup'        => $today,
-                'status_antrian'        => 'antrian'
+                'NO_ANTRIAN'        => $no_antrian,
+                'ID_PASIEN'        => $id,
+                'ID_USER'        => $this->session->userdata('id_user'),
+                'TGL_CHECKUP'        => $today,
+                'STATUS_ANTRIAN'        => 'antrian'
             );
 
-            $this->m_antrian->tambah('antrian', $data_antrian);
+            $this->m_antrian->tambah('ANTRIAN', $data_antrian);
 
             $this->session->set_flashdata('antrian_pasien', 'Antrian '.$no_antrian.' Berhasil Ditambahkan!');
             redirect(base_url('antrian'));
@@ -162,7 +165,7 @@ class Antrian extends CI_Controller
 
 
         if ($valid->run() === false) {
-            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan('pemeriksaan',$id)->num_rows();
+            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan('PEMERIKSAAN',$id)->num_rows();
 
             if ($cek_pemeriksaan>0) {
                 $this->session->set_flashdata('gagal', 'Pasien sudah diperiksa oleh petugas!');
@@ -173,20 +176,24 @@ class Antrian extends CI_Controller
                 $this->session->set_flashdata('gagal', validation_errors());
 
                 $edit_status = array(
-                    'status_antrian' => 'pemeriksaan',
-                    'id_user' => $this->session->userdata('id_user')
+                    'STATUS_ANTRIAN' => 'pemeriksaan',
+                    'ID_USER' => $this->session->userdata('id_user')
                 );
 
-                $this->m_antrian->edit('antrian',$edit_status,$id);
+                $this->m_antrian->edit('ANTRIAN',$edit_status,$id);
 
-                $data_pasien = $this->m_antrian->cek_data_pasien('antrian',$id)->row();
+                $data_pasien = $this->m_antrian->cek_data_pasien('ANTRIAN',$id)->row();
 
                 $data = array(
                     'title'        => 'Pemeriksaan',
                     'data'        => $data_pasien,
                     'isi'        => 'petugas/v_pemeriksaan',
                 );
-                
+
+                // echo "<pre>";
+                // print_r($data_pasien);
+                // echo "</pre>";
+                // die();
                 $this->load->view('layout/wrapper', $data);
             }
         } else {
@@ -199,14 +206,14 @@ class Antrian extends CI_Controller
             $keluhan     = $i->post('keluhan');
 
             $data = array(
-                'id_antrian'        => $id_antrian,
-                'tekanan_darah'        => $tekanan_darah,
-                'suhu_badan'        => $suhu_badan,
-                'keluhan'        => $keluhan,
-                'status_pemeriksaan'        => 'petugas'
+                'ID_ANTRIAN'        => $id_antrian,
+                'TEKANAN_DARAH'        => $tekanan_darah,
+                'SUHU_BADAN'        => $suhu_badan,
+                'KELUHAN'        => $keluhan,
+                'STATUS_PEMERIKSAAN'        => 'petugas'
             );
 
-            $this->m_antrian->tambah('pemeriksaan', $data);
+            $this->m_antrian->tambah('PEMERIKSAAN', $data);
 
             $this->session->set_flashdata('sukses', 'Pemeriksaan Oleh Petugas Selesai');
             redirect(base_url('antrian'));

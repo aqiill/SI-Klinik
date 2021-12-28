@@ -63,22 +63,22 @@
 										<tr>
 											<td>Nama Pasien</td>
 											<td>:</td>
-											<td><?= ucwords($pasien->nama_pasien) ?></td>
+											<td><?= ucwords($pasien->NAMA_PASIEN) ?></td>
 										</tr>
 										<tr>
 											<td>Usia</td>
 											<td>:</td>
-											<td><?= $pasien->umur_pasien ?></td>
+											<td><?= $pasien->UMUR_PASIEN ?></td>
 										</tr>
 										<tr>
 											<td>Jenis Kelamin</td>
 											<td>:</td>
-											<td><?= ucwords($pasien->jenis_kelamin) ?></td>
+											<td><?= ucwords($pasien->JENIS_KELAMIN) ?></td>
 										</tr>
 										<tr>
 											<td>Alamat</td>
 											<td>:</td>
-											<td><?= $pasien->alamat_pasien ?></td>
+											<td><?= $pasien->ALAMAT_PASIEN ?></td>
 										</tr>
 									</table>
 								</div>
@@ -107,9 +107,9 @@
 				                        	<?php $no=1; foreach ($rekam_medis as $value): ?>
 					                          <tr class="even pointer">
 					                            <td class=" "><?= $no++ ?></td>
-					                            <td class=""><?= ucwords($value->diagnosa) ?></td>
-					                            <td class=""><?= ucwords($value->tindakan) ?></td>
-					                            <td class=""><?= ucwords($value->rujukan) ?></td>
+					                            <td class=""><?= ucwords($value->DIAGNOSA) ?></td>
+					                            <td class=""><?= ucwords($value->TINDAKAN) ?></td>
+					                            <td class=""><?= ucwords($value->RUJUKAN) ?></td>
 					                            </td>
 					                          </tr>				                        		
 				                        	<?php endforeach ?>

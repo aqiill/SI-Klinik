@@ -46,32 +46,32 @@ class Login extends CI_Controller
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 
-			$cek = $this->m_login->login('user', $username, sha1($password));
+			$cek = $this->m_login->login('PENGGUNA', $username, sha1($password));
 
 
 			if ($cek->num_rows() > 0) {
-				if ($cek->row()->level == "administrator") {
-					$this->session->set_userdata('id_user', $cek->row()->id_user);
-					$this->session->set_userdata('username', $cek->row()->username);
-					$this->session->set_userdata('nik', $cek->row()->nik);
+				if ($cek->row()->LEVEL_PENGGUNA == "administrator") {
+					$this->session->set_userdata('id_user', $cek->row()->ID_USER);
+					$this->session->set_userdata('username', $cek->row()->USERNAME);
+					$this->session->set_userdata('nik', $cek->row()->NIK);
 					$this->session->set_userdata('level', 'administrator');
 					redirect('beranda');
-				} elseif ($cek->row()->level == "dokter") {
-					$this->session->set_userdata('id_user', $cek->row()->id_user);
-					$this->session->set_userdata('username', $cek->row()->username);
-					$this->session->set_userdata('nik', $cek->row()->nik);
+				} elseif ($cek->row()->LEVEL_PENGGUNA == "dokter") {
+					$this->session->set_userdata('id_user', $cek->row()->ID_USER);
+					$this->session->set_userdata('username', $cek->row()->USERNAME);
+					$this->session->set_userdata('nik', $cek->row()->NIK);
 					$this->session->set_userdata('level', 'dokter');
 					redirect('beranda');
-				} elseif ($cek->row()->level == "petugas") {
-					$this->session->set_userdata('id_user', $cek->row()->id_user);
-					$this->session->set_userdata('username', $cek->row()->username);
-					$this->session->set_userdata('nik', $cek->row()->nik);
+				} elseif ($cek->row()->LEVEL_PENGGUNA == "petugas") {
+					$this->session->set_userdata('id_user', $cek->row()->ID_USER);
+					$this->session->set_userdata('username', $cek->row()->USERNAME);
+					$this->session->set_userdata('nik', $cek->row()->NIK);
 					$this->session->set_userdata('level', 'petugas');
 					redirect('beranda');
-				} elseif ($cek->row()->level == "apoteker") {
-					$this->session->set_userdata('id_user', $cek->row()->id_user);
-					$this->session->set_userdata('username', $cek->row()->username);
-					$this->session->set_userdata('nik', $cek->row()->nik);
+				} elseif ($cek->row()->LEVEL_PENGGUNA == "apoteker") {
+					$this->session->set_userdata('id_user', $cek->row()->ID_USER);
+					$this->session->set_userdata('username', $cek->row()->USERNAME);
+					$this->session->set_userdata('nik', $cek->row()->NIK);
 					$this->session->set_userdata('level', 'apoteker');
 					redirect('beranda');
 				}

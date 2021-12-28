@@ -13,7 +13,7 @@ class M_antrian extends CI_Model
     //Login
     public function cek($table)
     {
-        $this->db->select_max('no_antrian');
+        $this->db->select_max('NO_ANTRIAN');
         $this->db->from($table);
         return $this->db->get();
     }
@@ -22,9 +22,9 @@ class M_antrian extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->where('id_pasien', $id_pasien);
-        $this->db->where('tgl_checkup', $today);
-        $this->db->where('status_antrian !=', 'selesai');
+        $this->db->where('ID_PASIEN', $id_pasien);
+        $this->db->where('TGL_CHECKUP', $today);
+        $this->db->where('STATUS_ANTRIAN !=', 'selesai');
         return $this->db->get();
     }
 
@@ -32,8 +32,8 @@ class M_antrian extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('pasien', $table.'.id_pasien = pasien.id_pasien');
-        $this->db->order_by('id_antrian','ASC');
+        $this->db->join('PASIEN', $table.'.ID_PASIEN = PASIEN.ID_PASIEN');
+        $this->db->order_by('ID_ANTRIAN','ASC');
         return $this->db->get();
     }
 
@@ -41,30 +41,30 @@ class M_antrian extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('pasien', $table.'.id_pasien = pasien.id_pasien');
-        $this->db->order_by('id_antrian','ASC');
-        $this->db->where('tgl_checkup', date('Y-m-d'));
+        $this->db->join('PASIEN', $table.'.ID_PASIEN = PASIEN.ID_PASIEN');
+        $this->db->order_by('ID_ANTRIAN','ASC');
+        $this->db->where('TGL_CHECKUP', strtoupper(date('d-M-y')));
         return $this->db->get();
     }
 
     public function cek_data_pasien($table,$id)
     {
-        $this->db->select('id_antrian,no_antrian,pasien.id_pasien,user.id_user,tgl_checkup,status_antrian,nik_pasien,nama_pasien,umur_pasien,alamat_pasien, jenis_kelamin, nama_user');
+        $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('pasien', $table.'.id_pasien = pasien.id_pasien');
-        $this->db->join('user', $table.'.id_user = user.id_user');
-        $this->db->where('id_antrian',$id);
+        $this->db->join('PASIEN', $table.'.ID_PASIEN = PASIEN.ID_PASIEN');
+        $this->db->join('PENGGUNA', $table.'.ID_USER = PENGGUNA.ID_USER');
+        $this->db->where('ID_ANTRIAN',$id);
         return $this->db->get();
     }
 
     public function cek_pemeriksaan($table,$id)
     {
-        return $this->db->get_where($table,array('id_antrian' => $id));
+        return $this->db->get_where($table,array('ID_ANTRIAN' => $id));
     }
 
     public function cek_pemeriksaan_dokter($table,$id)
     {
-        return $this->db->get_where($table,array('id_pemeriksaan' => $id));
+        return $this->db->get_where($table,array('ID_PEMERIKSAAN' => $id));
     }
 
     public function tambah($table,$data)
@@ -74,7 +74,7 @@ class M_antrian extends CI_Model
 
     public function edit($table,$data,$id)
     {
-        return $this->db->update($table,$data, array('id_antrian' => $id));
+        return $this->db->update($table,$data, array('ID_ANTRIAN' => $id));
     }
 
 }

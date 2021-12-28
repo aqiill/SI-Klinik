@@ -31,7 +31,7 @@ class Obat extends CI_Controller
 
     public function index()
     {
-        $obat = $this->m_obat->data('obat')->result();
+        $obat = $this->m_obat->data('OBAT')->result();
         $data = array(
             'title'        => 'User',
             'obat'        => $obat,
@@ -44,15 +44,15 @@ class Obat extends CI_Controller
     public function pengambilan()
     {
         if ($this->session->userdata('level')!="administrator") {
-            $resep = $this->m_obat->resepobat_now('resepobat')->result();
+            $resep = $this->m_obat->resepobat_now('RESEPOBAT')->result();
         }
         else{
-            $resep = $this->m_obat->resepobat('resepobat')->result();
+            $resep = $this->m_obat->resepobat('RESEPOBAT')->result();
         }
 
         if ($this->uri->segment(3) !="") {
             $id_resep = $this->uri->segment(3);
-            $detail_obat = $this->m_obat->detail_obat('resepobat',$id_resep)->result();
+            $detail_obat = $this->m_obat->detail_obat('RESEPOBAT',$id_resep)->result();
             $data = array(
                 'title'        => 'Pengambilan Obat',
                 'resep'        => $resep,
@@ -160,16 +160,16 @@ class Obat extends CI_Controller
             $harga_obat     = $i->post('harga_obat');
 
             $data = array(
-                'masa_berlaku'        => $masa_berlaku,
-                'jenis_obat'        => $jenis_obat,
-                'nama_obat'        => $nama_obat,
-                'tahun_produksi'        => $tahun_produksi,
-                'stok_obat'        => $stok_obat,
-                'merk_obat'        => $merk_obat,
-                'harga_obat'        => $harga_obat
+                'MASA_BERLAKU'        => $masa_berlaku,
+                'JENIS_OBAT'        => $jenis_obat,
+                'NAMA_OBAT'        => $nama_obat,
+                'TAHUN_PRODUKSI'        => $tahun_produksi,
+                'STOK_OBAT'        => $stok_obat,
+                'MERK_OBAT'        => $merk_obat,
+                'HARGA_OBAT'        => $harga_obat
             );
 
-            $this->m_obat->tambah('obat', $data);
+            $this->m_obat->tambah('OBAT', $data);
 
             $this->session->set_flashdata('sukses', 'Obat Berhasil Ditambahkan!');
             redirect(base_url('obat'));
@@ -264,16 +264,16 @@ class Obat extends CI_Controller
             $harga_obat     = $i->post('harga_obat');
 
             $data = array(
-                'masa_berlaku'        => $masa_berlaku,
-                'jenis_obat'        => $jenis_obat,
-                'nama_obat'        => $nama_obat,
-                'tahun_produksi'        => $tahun_produksi,
-                'stok_obat'        => $stok_obat,
-                'merk_obat'        => $merk_obat,
-                'harga_obat'        => $harga_obat
+                'MASA_BERLAKU'        => $masa_berlaku,
+                'JENIS_OBAT'        => $jenis_obat,
+                'NAMA_OBAT'        => $nama_obat,
+                'TAHUN_PRODUKSI'        => $tahun_produksi,
+                'STOK_OBAT'        => $stok_obat,
+                'MERK_OBAT'        => $merk_obat,
+                'HARGA_OBAT'        => $harga_obat
             );
 
-            $this->m_obat->edit('obat', $data, $id);
+            $this->m_obat->edit('OBAT', $data, $id);
 
             $this->session->set_flashdata('sukses', 'Obat Berhasil diubah!');
             redirect(base_url('obat'));
@@ -286,7 +286,7 @@ class Obat extends CI_Controller
     {
         if($id=="") show_404();
 
-        $this->m_obat->hapus('obat', $id);
+        $this->m_obat->hapus('OBAT', $id);
 
         $this->session->set_flashdata('sukses', 'Obat Berhasil Dihapus!');
         redirect(base_url('obat'));
@@ -298,9 +298,9 @@ class Obat extends CI_Controller
     {
         if($id=="") show_404();
 
-        $obat_pasien = $this->m_obat->data_obat_pasien('resepobat',$id)->result();
-        $pasien = $this->m_obat->cek_pasien('rekammedis',$id)->row();
-        $list_obat = $this->m_obat->data_ready('obat',$id)->result();
+        $obat_pasien = $this->m_obat->data_obat_pasien('RESEPOBAT',$id)->result();
+        $pasien = $this->m_obat->cek_pasien('REKAMMEDIS',$id)->row();
+        $list_obat = $this->m_obat->data_ready('OBAT',$id)->result();
 
         $data = array(
             'title'        => 'Obat Pasien',
@@ -361,29 +361,29 @@ class Obat extends CI_Controller
             $jumlah_obat     = $i->post('jumlah_obat');
             $keterangan     = $i->post('keterangan');
 
-            $pilihan_obat = $this->m_obat->detail('obat', $id_obat)->row();
-            $sisa = $pilihan_obat->stok_obat - $jumlah_obat;
+            $pilihan_obat = $this->m_obat->detail('OBAT', $id_obat)->row();
+            $sisa = $pilihan_obat->STOK_OBAT - $jumlah_obat;
             if ($sisa>0) {
 
                 $data = array(
-                    'id_rekam_medis'        => $id,
-                    'id_obat'        => $id_obat,
-                    'jumlah_obat'        => $jumlah_obat,
-                    'keterangan'        => $keterangan
+                    'ID_REKAM_MEDIS'        => $id,
+                    'ID_OBAT'        => $id_obat,
+                    'JUMLAH_OBAT'        => $jumlah_obat,
+                    'KETERANGAN'        => $keterangan
                 );
-                $this->m_obat->tambah('resepobat',$data);
+                $this->m_obat->tambah('RESEPOBAT',$data);
 
-                $kurang = array('stok_obat' => $sisa);
-                $this->m_obat->edit('obat',$kurang,$id_obat);
+                $kurang = array('STOK_OBAT' => $sisa);
+                $this->m_obat->edit('OBAT',$kurang,$id_obat);
 
-                $harga_obat = $jumlah_obat * $pilihan_obat->harga_obat;
+                $harga_obat = $jumlah_obat * $pilihan_obat->HARGA_OBAT;
 
-                $cek_pembayaran = $this->m_pembayaran->detail('pembayaran',$id)->row();
-                $total_pembayaran = $cek_pembayaran->total_bayar + $harga_obat;
+                $cek_pembayaran = $this->m_pembayaran->detail('PEMBAYARAN',$id)->row();
+                $total_pembayaran = $cek_pembayaran->TOTAL_BAYAR + $harga_obat;
 
-                $data_pembayaran = array('total_bayar' => $total_pembayaran);
+                $data_pembayaran = array('TOTAL_BAYAR' => $total_pembayaran);
 
-                $this->m_pembayaran->pembayaran('pembayaran',$data_pembayaran,$id);
+                $this->m_pembayaran->pembayaran('PEMBAYARAN',$data_pembayaran,$id);
 
                 $this->session->set_flashdata('sukses', 'Obat Berhasil ditambahkan!');
                 redirect(base_url('obat/pasien/'.$id));
@@ -400,24 +400,24 @@ class Obat extends CI_Controller
     {
         if($id=="") show_404();
 
-        $cek_resep = $this->m_obat->detail_resep('resepobat',$id)->row();
+        $cek_resep = $this->m_obat->detail_resep('RESEPOBAT',$id)->row();
 
-        $tambah_obat = $cek_resep->stok_obat + $cek_resep->jumlah_obat;
-        $data_obat = array('stok_obat' => $tambah_obat);
-        $this->m_obat->edit('obat', $data_obat, $cek_resep->id_obat);
+        $tambah_obat = $cek_resep->STOK_OBAT + $cek_resep->JUMLAH_OBAT;
+        $data_obat = array('STOK_OBAT' => $tambah_obat);
+        $this->m_obat->edit('OBAT', $data_obat, $cek_resep->ID_OBAT);
 
-        $kurang_harga = $cek_resep->jumlah_obat * $cek_resep->harga_obat;
+        $kurang_harga = $cek_resep->JUMLAH_OBAT * $cek_resep->HARGA_OBAT;
 
-        $cek_pembayaran = $this->m_pembayaran->cek_pembayaran('pembayaran', $cek_resep->id_rekam_medis)->row();
-        $total = $cek_pembayaran->total_bayar - $kurang_harga;
-        $data_pembayaran = array('total_bayar' => $total);
-        $this->m_pembayaran->pembayaran('pembayaran', $data_pembayaran, $cek_resep->id_rekam_medis);
+        $cek_pembayaran = $this->m_pembayaran->cek_pembayaran('pembayaran', $cek_resep->ID_REKAM_MEDIS)->row();
+        $total = $cek_pembayaran->TOTAL_BAYAR - $kurang_harga;
+        $data_pembayaran = array('TOTAL_BAYAR' => $total);
+        $this->m_pembayaran->pembayaran('PEMBAYARAN', $data_pembayaran, $cek_resep->ID_REKAM_MEDIS);
 
 
-        $this->m_obat->hapus_resep('resepobat', $id);
+        $this->m_obat->hapus_resep('RESEPOBAT', $id);
 
         $this->session->set_flashdata('sukses', 'Obat Pasien Berhasil Dihapus!');
-        redirect(base_url('obat/pasien/'.$cek_resep->id_rekam_medis));
+        redirect(base_url('obat/pasien/'.$cek_resep->ID_REKAM_MEDIS));
     }    
 
 

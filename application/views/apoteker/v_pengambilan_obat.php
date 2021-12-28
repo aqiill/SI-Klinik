@@ -51,13 +51,13 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                     <?php $no=1; foreach ($resep as $value): ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $value->no_antrian ?></td>
-                                        <td><?= $value->nama_pasien ?></td>
-                                        <td><?= $value->diagnosa ?></td>
-                                        <td><?= $value->tgl_checkup ?></td>
-                                        <td><?= $value->umur_pasien ?></td>
+                                        <td><?= $value->NO_ANTRIAN ?></td>
+                                        <td><?= $value->NAMA_PASIEN ?></td>
+                                        <td><?= $value->DIAGNOSA ?></td>
+                                        <td><?= $value->TGL_CHECKUP ?></td>
+                                        <td><?= $value->UMUR_PASIEN ?></td>
                                         <td>
-                                            <a href="<?= base_url('obat/pengambilan/'.$value->id_rekam_medis) ?>" class="btn btn-sm btn-info"><i class="fas fa-capsules"></i> Detail Obat</a>
+                                            <a href="<?= base_url('obat/pengambilan/'.$value->ID_REKAM_MEDIS) ?>" class="btn btn-sm btn-info"><i class="fas fa-capsules"></i> Detail Obat</a>
                                         </td>
                                     </tr>
 
@@ -72,7 +72,7 @@ if ($this->session->flashdata('gagal') != "") { ?>
                             <h2>Detail Obat Pasien</h2>
                             <?php if ($this->uri->segment(3) !=""){ ?>
                                 <?php if ($this->session->userdata('level') =="dokter" ||$this->session->userdata('level') =="administrator" ): ?>
-                                <a href="<?= base_url('obat/pasien/'.$detail_obat[0]->id_rekam_medis) ?>" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus" aria-hidden="true"></i> Tambah obat</a>
+                                <a href="<?= base_url('obat/pasien/'.$detail_obat[0]->ID_REKAM_MEDIS) ?>" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus" aria-hidden="true"></i> Tambah obat</a>
                                 <?php endif ?>
                             <?php } ?>
                             <div class="clearfix"></div>
@@ -84,22 +84,22 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                         <tr>
                                             <td>Nama Obat</td>
                                             <td>:</td>
-                                            <td><?= $value->nama_obat ?></td>
+                                            <td><?= $value->NAMA_OBAT ?></td>
                                         </tr>
                                         <tr>
                                             <td>Jumlah</td>
                                             <td>:</td>
-                                            <td><?= $value->jumlah_obat ?></td>
+                                            <td><?= $value->JUMLAH_OBAT ?></td>
                                         </tr>
                                         <tr>
                                             <td>Keterangan</td>
                                             <td>:</td>
-                                            <td><?= $value->keterangan ?></td>
+                                            <td><?= $value->KETERANGAN ?></td>
                                         </tr>
                                         <tr>
                                             <td>Masa Berlaku</td>
                                             <td>:</td>
-                                            <td><?= $value->masa_berlaku ?></td>
+                                            <td><?= $value->MASA_BERLAKU ?></td>
                                         </tr>
                                         <tr>
                                             <td colspan="3"></td>

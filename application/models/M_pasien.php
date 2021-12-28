@@ -15,7 +15,7 @@ class M_pasien extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->order_by('id_pasien', 'DESC');
+        $this->db->order_by('ID_PASIEN', 'DESC');
         return $this->db->get();
     }
 
@@ -23,21 +23,21 @@ class M_pasien extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('antrian', $table.'.id_pasien = antrian.id_pasien');
-        $this->db->join('pemeriksaan', 'antrian.id_antrian = pemeriksaan.id_antrian');
-        $this->db->join('rekammedis', 'pemeriksaan.id_pemeriksaan = rekammedis.id_pemeriksaan');
-        $this->db->where($table.'.id_pasien', $id);
+        $this->db->join('ANTRIAN', $table.'.ID_PASIEN = ANTRIAN.ID_PASIEN');
+        $this->db->join('PEMERIKSAAN', 'ANTRIAN.ID_ANTRIAN = PEMERIKSAAN.ID_ANTRIAN');
+        $this->db->join('REKAMMEDIS', 'PEMERIKSAAN.ID_PEMERIKSAAN = REKAMMEDIS.ID_PEMERIKSAAN');
+        $this->db->where($table.'.ID_PASIEN', $id);
         return $this->db->get();
     }
 
     public function detail($table,$id)
     {
-        return $this->db->get_where($table, array('id_pasien' => $id));
+        return $this->db->get_where($table, array('ID_PASIEN' => $id));
     }
 
     public function detail_nik($table,$nik)
     {
-        return $this->db->get_where($table, array('nik_pasien' => $nik));
+        return $this->db->get_where($table, array('NIK_PASIEN' => $nik));
     }
     
     public function tambah($table,$data)
@@ -47,11 +47,11 @@ class M_pasien extends CI_Model
     
     public function edit($table,$data,$id)
     {
-        return $this->db->update($table,$data,array('id_pasien' => $id));
+        return $this->db->update($table,$data,array('ID_PASIEN' => $id));
     }
     
     public function hapus($table,$id)
     {
-        return $this->db->delete($table,array('id_pasien' => $id));
+        return $this->db->delete($table,array('ID_PASIEN' => $id));
     }
 }

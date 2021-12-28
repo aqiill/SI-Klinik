@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'db_klinik',
-	'dbdriver' => 'mysqli',
+	'hostname' => '103.157.96.115',
+	'username' => 'TIF420_B03',
+	'password' => 'cartwheel',
+	'database' => '',
+	'dbdriver' => 'oci8',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

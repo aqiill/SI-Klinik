@@ -15,12 +15,12 @@ class M_pembayaran extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('rekammedis', $table.'.id_rekam_medis = rekammedis.id_rekam_medis');
-        // $this->db->join('user', $table.'.id_user = user.id_user');
-        $this->db->join('pemeriksaan', 'rekammedis.id_pemeriksaan = pemeriksaan.id_pemeriksaan');
-        $this->db->join('antrian', 'pemeriksaan.id_antrian = antrian.id_antrian');
-        $this->db->join('pasien', 'antrian.id_pasien = pasien.id_pasien');
-        $this->db->join('user', 'antrian.id_user = user.id_user');
+        $this->db->join('REKAMMEDIS', $table.'.ID_REKAM_MEDIS = REKAMMEDIS.ID_REKAM_MEDIS');
+        // $this->db->join('PENGGUNA', $table.'.ID_USER = PENGGUNA.ID_USER');
+        $this->db->join('PEMERIKSAAN', 'REKAMMEDIS.ID_PEMERIKSAAN = PEMERIKSAAN.ID_PEMERIKSAAN');
+        $this->db->join('ANTRIAN', 'PEMERIKSAAN.ID_ANTRIAN = ANTRIAN.ID_ANTRIAN');
+        $this->db->join('PASIEN', 'ANTRIAN.ID_PASIEN = PASIEN.ID_PASIEN');
+        $this->db->join('PENGGUNA', 'ANTRIAN.ID_USER = PENGGUNA.ID_USER');
         return $this->db->get();
     }
 
@@ -28,39 +28,39 @@ class M_pembayaran extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->join('rekammedis', $table.'.id_rekam_medis = rekammedis.id_rekam_medis');
-        // $this->db->join('user', $table.'.id_user = user.id_user');
-        $this->db->join('pemeriksaan', 'rekammedis.id_pemeriksaan = pemeriksaan.id_pemeriksaan');
-        $this->db->join('antrian', 'pemeriksaan.id_antrian = antrian.id_antrian');
-        $this->db->join('pasien', 'antrian.id_pasien = pasien.id_pasien');
-        $this->db->join('user', 'antrian.id_user = user.id_user');
-        $this->db->where('antrian.id_user', $id);
+        $this->db->join('REKAMMEDIS', $table.'.ID_REKAM_MEDIS = REKAMMEDIS.ID_REKAM_MEDIS');
+        // $this->db->join('PENGGUNA', $table.'.ID_USER = PENGGUNA.ID_USER');
+        $this->db->join('PEMERIKSAAN', 'REKAMMEDIS.ID_PEMERIKSAAN = PEMERIKSAAN.ID_PEMERIKSAAN');
+        $this->db->join('ANTRIAN', 'PEMERIKSAAN.ID_ANTRIAN = ANTRIAN.ID_ANTRIAN');
+        $this->db->join('PASIEN', 'ANTRIAN.ID_PASIEN = PASIEN.ID_PASIEN');
+        $this->db->join('PENGGUNA', 'ANTRIAN.ID_USER = PENGGUNA.ID_USER');
+        $this->db->where('ANTRIAN.ID_USER', $id);
         return $this->db->get();
     }
 
     public function detail($table,$id)
     {
-        return $this->db->get_where($table, array('id_rekam_medis' => $id));
+        return $this->db->get_where($table, array('ID_REKAM_MEDIS' => $id));
     }
 
     public function pembayaran($table,$data,$id)
     {
-        return $this->db->update($table,$data, array('id_rekam_medis' => $id));
+        return $this->db->update($table,$data, array('ID_REKAM_MEDIS' => $id));
     }
 
     public function bayar($table,$data,$id)
     {
-        return $this->db->update($table,$data, array('id_pembayaran' => $id));
+        return $this->db->update($table,$data, array('ID_PEMBAYARAN' => $id));
     }
 
     public function cek_pembayaran($table,$id)
     {
-        return $this->db->get_where($table, array('id_rekam_medis' => $id));
+        return $this->db->get_where($table, array('ID_REKAM_MEDIS' => $id));
     }
 
     public function jlm_pendapatan($table)
     {
-        return $this->db->get_where($table, array('status_bayar' => 'lunas'));
+        return $this->db->get_where($table, array('STATUS_BAYAR' => 'lunas'));
     }
 
 }

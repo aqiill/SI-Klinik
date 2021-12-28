@@ -48,13 +48,13 @@
                                         
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->id_pasien) ?>"><?= $value->nik_pasien ?></a></td>
-                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->id_pasien) ?>"><?= $value->nama_pasien ?></a></td>
+                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->ID_PASIEN) ?>"><?= $value->NIK_PASIEN ?></a></td>
+                                            <td><a href="<?= base_url('pasien/rekam_medis/'.$value->ID_PASIEN) ?>"><?= $value->NAMA_PASIEN ?></a></td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_pasien ?>">
+                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->ID_PASIEN ?>">
                                                  <i class="fa fa-info" aria-hidden="true"></i> Detail
                                                 </button>
-                                                <a href="<?= base_url('pasien/hapus/'.$value->id_pasien) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
+                                                <a href="<?= base_url('pasien/hapus/'.$value->ID_PASIEN) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         
@@ -62,12 +62,12 @@
 
 
 <!-- Modal Edit-->
-<div class="modal fade" id="edit<?= $value->id_pasien ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="edit<?= $value->ID_PASIEN ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="<?= base_url('pasien/edit/'.$value->id_pasien) ?>" method="POST" class="needs-validation" novalidate>
+    <form action="<?= base_url('pasien/edit/'.$value->ID_PASIEN) ?>" method="POST" class="needs-validation" novalidate>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Pasien <?= $value->nama_pasien ?></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Pasien <?= $value->NAMA_PASIEN ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -76,14 +76,14 @@
                 
         <div class="form-group">
             <label for="nik">NIK</label>
-            <input type="number" name="nik_pasien" class="form-control" value="<?= $value->nik_pasien ?>" id="nik" placeholder="Enter NIK" required>
+            <input type="number" name="nik_pasien" class="form-control" value="<?= $value->NIK_PASIEN ?>" id="nik" placeholder="Enter NIK" required>
             <div class="invalid-feedback">
                 NIK harus diisi.
             </div>
         </div>
         <div class="form-group">
             <label for="nama">Nama Lengkap</label>
-            <input type="text" name="nama_pasien" class="form-control" value="<?= $value->nama_pasien ?>" id="nama" placeholder="Enter Nama" required>
+            <input type="text" name="nama_pasien" class="form-control" value="<?= $value->NAMA_PASIEN ?>" id="nama" placeholder="Enter Nama" required>
             <div class="invalid-feedback">
                 Nama harus diisi.
             </div>
@@ -92,26 +92,26 @@
             <label>Jenis Kelamin</label>
             <div class="radio">
                 <label>
-                    <input type="radio"  <?php if ($value->jenis_kelamin == 'laki-laki') { echo "checked"; } ?>  value="laki-laki" id="optionsRadios1" name="jenis_kelamin"> Laki-Laki
+                    <input type="radio"  <?php if ($value->JENIS_KELAMIN == 'laki-laki') { echo "checked"; } ?>  value="laki-laki" id="optionsRadios1" name="jenis_kelamin"> Laki-Laki
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" <?php if ($value->jenis_kelamin == 'perempuan') { echo "checked"; } ?> value="perempuan" id="optionsRadios2" name="jenis_kelamin"> Perempuan
+                    <input type="radio" <?php if ($value->JENIS_KELAMIN == 'perempuan') { echo "checked"; } ?> value="perempuan" id="optionsRadios2" name="jenis_kelamin"> Perempuan
                 </label>
             </div>
         </div>
 
         <div class="form-group">
             <label for="umur">Umur</label>
-            <input type="number" name="umur_pasien" class="form-control" value="<?= $value->umur_pasien ?>" id="umur" placeholder="Enter Umur" required>
+            <input type="number" name="umur_pasien" class="form-control" value="<?= $value->UMUR_PASIEN ?>" id="umur" placeholder="Enter Umur" required>
             <div class="invalid-feedback">
                 Umur harus diisi.
             </div>
         </div>
         <div class="form-group">
             <label for="alamat">Alamat</label>
-            <textarea required name="alamat_pasien" class="form-control"id="alamat" rows="3"><?= $value->alamat_pasien ?></textarea>
+            <textarea required name="alamat_pasien" class="form-control"id="alamat" rows="3"><?= $value->ALAMAT_PASIEN ?></textarea>
             <div class="invalid-feedback">
                 Alamat harus diisi.
             </div>

@@ -28,7 +28,7 @@ class Setting extends CI_Controller
     {
         $id_user = $this->session->userdata('id_user');
 
-        $profile = $this->m_user->detail('user', $id_user)->row();
+        $profile = $this->m_user->detail('PENGGUNA', $id_user)->row();
         $data = array(
             'title'        => 'User',
             'profile'        => $profile,
@@ -79,13 +79,13 @@ class Setting extends CI_Controller
         } else {
 
             $data = array(
-                'nik'        => $this->input->post('nik'),
-                'nama_user'        => $this->input->post('nama'),
-                'alamat'        => $this->input->post('alamat')
+                'NIK'        => $this->input->post('nik'),
+                'NAMA_USER'        => $this->input->post('nama'),
+                'ALAMAT'        => $this->input->post('alamat')
             );
 
             $this->session->set_userdata('nik', $this->input->post('nik'));
-            $this->m_user->edit('user', $data, $id);
+            $this->m_user->edit('PENGGUNA', $data, $id);
 
             $this->session->set_flashdata('sukses', 'User Berhasil diperbaharui!');
             redirect(base_url('setting'));
@@ -141,7 +141,7 @@ class Setting extends CI_Controller
             $password_baru = $this->input->post('password_baru');
             $password_konf = $this->input->post('password_konf');
 
-            $cek = $this->m_login->gantipass('user', sha1($password_lama));
+            $cek = $this->m_login->gantipass('PENGGUNA', sha1($password_lama));
 
             if ($cek->num_rows() > 0) {
                 if ($password_baru != $password_konf) {
@@ -150,9 +150,9 @@ class Setting extends CI_Controller
                 } else {
                     $id_user = $this->session->userdata('id_user');
                     $data = array(
-                        'password' => sha1($password_baru)
+                        'PASSWORD' => sha1($password_baru)
                     );
-                    $this->m_login->update('user', $data, $id_user);
+                    $this->m_login->update('PENGGUNA', $data, $id_user);
                     $this->session->set_flashdata('sukses', "Password berhasil diubah!");
                     redirect('beranda');
                 }

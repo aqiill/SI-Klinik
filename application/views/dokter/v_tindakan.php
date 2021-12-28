@@ -31,34 +31,34 @@ if ($this->session->flashdata('gagal') != "") { ?>
             		<tr>
             			<td>Nama Pasien</td>
             			<td>:</td>
-            			<td><?= $pasien->nama_pasien ?></td>
+            			<td><?= $pasien->NAMA_PASIEN ?></td>
             		</tr>
             		<tr>
             			<td>Usia Pasien</td>
             			<td>:</td>
-            			<td><?= $pasien->umur_pasien ?></td>
+            			<td><?= $pasien->UMUR_PASIEN ?></td>
             		</tr>
             		<tr>
             			<td>Suhu Badan</td>
             			<td>:</td>
-            			<td><?= $pasien->suhu_badan ?></td>
+            			<td><?= $pasien->SUHU_BADAN ?></td>
             		</tr>
             		<tr>
             			<td>Tekanan Darah</td>
             			<td>:</td>
-            			<td><?= $pasien->tekanan_darah ?></td>
+            			<td><?= $pasien->TEKANAN_DARAH ?></td>
             		</tr>
             		<tr>
             			<td>Keluhan</td>
             			<td>:</td>
-            			<td><?= $pasien->keluhan ?></td>
+            			<td><?= $pasien->KELUHAN ?></td>
             		</tr>
             	</table>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
 
-                <form method="POST" action="<?= base_url('periksa/tindakan/'.$pasien->id_pemeriksaan) ?>" class="needs-validation" novalidate>
+                <form method="POST" action="<?= base_url('periksa/tindakan/'.$pasien->ID_PEMERIKSAAN) ?>" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label for="diagnosa">Diagnosa</label>
                         <input type="text" name="diagnosa" class="form-control" id="diagnosa" required>

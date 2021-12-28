@@ -47,18 +47,18 @@
                                     <?php $no=1; foreach ($pembayaran as $value): ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $value->nik_pasien ?></td>
-                                            <td><?= $value->nama_pasien ?></td>
-                                            <td><?= $value->tgl_bayar ?></td>
-                                            <td>Rp. <?= number_format($value->total_bayar) ?></td>
+                                            <td><?= $value->NIK_PASIEN ?></td>
+                                            <td><?= $value->NAMA_PASIEN ?></td>
+                                            <td><?= $value->TGL_BAYAR ?></td>
+                                            <td>Rp. <?= number_format($value->TOTAL_BAYAR) ?></td>
                                             <td>
-                                                <?php if ($value->status_bayar =="pending"){ ?>
-                                                    <a href="<?= base_url('periksa/proses_bayar/'.$value->id_antrian.'/y/'.$value->id_pembayaran) ?>" class="btn btn-sm btn-warning"><i class="fas fa-money-bill-wave-alt"></i> Pending</a>
-                                                <?php }elseif ($value->status_bayar =="lunas") { ?>
-                                                    <a href="<?= base_url('periksa/proses_bayar/'.$value->id_antrian.'/n/'.$value->id_pembayaran) ?>" class="btn btn-sm btn-success"><i class="fas fa-money-bill-wave-alt"></i> Lunas</a>
+                                                <?php if ($value->STATUS_BAYAR =="pending"){ ?>
+                                                    <a href="<?= base_url('periksa/proses_bayar/'.$value->ID_ANTRIAN.'/y/'.$value->ID_PEMBAYARAN) ?>" class="btn btn-sm btn-warning"><i class="fas fa-money-bill-wave-alt"></i> Pending</a>
+                                                <?php }elseif ($value->STATUS_BAYAR =="lunas") { ?>
+                                                    <a href="<?= base_url('periksa/proses_bayar/'.$value->ID_ANTRIAN.'/n/'.$value->ID_PEMBAYARAN) ?>" class="btn btn-sm btn-success"><i class="fas fa-money-bill-wave-alt"></i> Lunas</a>
                                                 <?php } ?>
                                             </td>
-                                            <td><?= $value->nama_user ?></td>
+                                            <td><?= $value->NAMA_USER ?></td>
                                         </tr>
 
 

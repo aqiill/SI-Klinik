@@ -18,12 +18,12 @@ class M_user extends CI_Model
 
     public function detail($table,$id)
     {
-        return $this->db->get_where($table, array('id_user' => $id));
+        return $this->db->get_where($table, array('ID_USER' => $id));
     }
 
     public function jlm_dokter($table)
     {
-        return $this->db->get_where($table, array('level' => "dokter"));
+        return $this->db->get_where($table, array('LEVEL_PENGGUNA' => "dokter"));
     }
     
     public function tambah($table,$data)
@@ -33,11 +33,11 @@ class M_user extends CI_Model
     
     public function edit($table,$data,$id)
     {
-        return $this->db->update($table,$data,array('id_user' => $id));
+        return $this->db->update($table,$data,array('ID_USER' => $id));
     }
     
     public function hapus($table,$id)
     {
-        return $this->db->delete($table,array('id_user' => $id));
+        return $this->db->delete($table,array('ID_USER' => $id));
     }
 }

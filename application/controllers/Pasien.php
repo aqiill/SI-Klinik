@@ -31,7 +31,7 @@ class Pasien extends CI_Controller
 
     public function index()
     {
-        $pasien = $this->m_pasien->data('pasien')->result();
+        $pasien = $this->m_pasien->data('PASIEN')->result();
         $data = array(
             'title'        => 'User',
             'pasien'        => $pasien,
@@ -45,8 +45,8 @@ class Pasien extends CI_Controller
     {
         if ($id=="") show_404();
 
-        $pasien = $this->m_pasien->detail('pasien',$id)->row();
-        $rekam_medis = $this->m_pasien->rekam_medis('pasien',$id)->result();
+        $pasien = $this->m_pasien->detail('PASIEN',$id)->row();
+        $rekam_medis = $this->m_pasien->rekam_medis('PASIEN',$id)->result();
         $data = array(
             'title'        => 'Rekam Medis',
             'pasien'        => $pasien,
@@ -64,7 +64,7 @@ class Pasien extends CI_Controller
         $valid->set_rules(
             'nik_pasien',
             'NIK',
-            'required|min_length[16]|is_unique[pasien.nik_pasien]',
+            'required|min_length[16]|is_unique[PASIEN.NIK_PASIEN]',
             array(
                 'required'                       => 'NIK harus diisi',
                 'min_length'                       => 'NIK minimal 16 digit!',
@@ -126,14 +126,14 @@ class Pasien extends CI_Controller
             $jenis_kelamin     = $i->post('jenis_kelamin');
 
             $data = array(
-                'nik_pasien'        => $nik_pasien,
-                'nama_pasien'        => $nama_pasien,
-                'umur_pasien'        => $umur_pasien,
-                'alamat_pasien'        => $alamat_pasien,
-                'jenis_kelamin'        => $jenis_kelamin
+                'NIK_PASIEN'        => $nik_pasien,
+                'NAMA_PASIEN'        => $nama_pasien,
+                'UMUR_PASIEN'        => $umur_pasien,
+                'ALAMAT_PASIEN'        => $alamat_pasien,
+                'JENIS_KELAMIN'        => $jenis_kelamin
             );
 
-            $this->m_pasien->tambah('pasien', $data);
+            $this->m_pasien->tambah('PASIEN', $data);
 
             $this->session->set_flashdata('sukses', 'Pasien Berhasil Ditambahkan!');
             redirect(base_url('pasien'));
@@ -212,14 +212,14 @@ class Pasien extends CI_Controller
             $jenis_kelamin     = $i->post('jenis_kelamin');
 
             $data = array(
-                'nik_pasien'        => $nik_pasien,
-                'nama_pasien'        => $nama_pasien,
-                'umur_pasien'        => $umur_pasien,
-                'alamat_pasien'        => $alamat_pasien,
-                'jenis_kelamin'        => $jenis_kelamin
+                'NIK_PASIEN'        => $nik_pasien,
+                'NAMA_PASIEN'        => $nama_pasien,
+                'UMUR_PASIEN'        => $umur_pasien,
+                'ALAMAT_PASIEN'        => $alamat_pasien,
+                'JENIS_KELAMIN'        => $jenis_kelamin
             );
 
-            $this->m_pasien->edit('pasien', $data, $id);
+            $this->m_pasien->edit('PASIEN', $data, $id);
 
             $this->session->set_flashdata('sukses', 'Pasien Berhasil diubah!');
             redirect(base_url('pasien'));
@@ -232,7 +232,7 @@ class Pasien extends CI_Controller
     {
         if($id=="") show_404();
 
-        $this->m_pasien->hapus('pasien', $id);
+        $this->m_pasien->hapus('PASIEN', $id);
 
         $this->session->set_flashdata('sukses', 'Pasien Berhasil Dihapus!');
         redirect(base_url('pasien'));

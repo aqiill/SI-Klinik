@@ -50,26 +50,26 @@ if ($this->session->flashdata('gagal') != "") { ?>
                                 <tbody>
                                     <?php foreach ($user as $value): ?>
                                     <tr>
-                                        <td><?= $value->nik ?></td>
-                                        <td><?= $value->nama_user ?></td>
-                                        <td><?= $value->username ?></td>
-                                        <td><?= $value->level ?></td>
+                                        <td><?= $value->NIK ?></td>
+                                        <td><?= $value->NAMA_USER ?></td>
+                                        <td><?= $value->USERNAME ?></td>
+                                        <td><?= $value->LEVEL_PENGGUNA ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->id_user ?>">
+                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit<?= $value->ID_USER ?>">
                                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                                             </button>
-                                            <a href="<?= base_url('user/hapus/'.$value->id_user) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
+                                            <a href="<?= base_url('user/hapus/'.$value->ID_USER) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus? Y/N')"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a>
                                         </td>
                                     </tr>
 
 
 <!-- Modal Edit-->
-<div class="modal fade" id="edit<?= $value->id_user ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="edit<?= $value->ID_USER ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form action="<?= base_url('user/edit/'.$value->id_user) ?>" method="POST" class="needs-validation" novalidate>
+    <form action="<?= base_url('user/edit/'.$value->ID_USER) ?>" method="POST" class="needs-validation" novalidate>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data <?= $value->username ?></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data <?= $value->USERNAME ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -80,10 +80,10 @@ if ($this->session->flashdata('gagal') != "") { ?>
             <label for="level" class="col-form-label">Level:</label>
             <select class="custom-select" id="level" name="level" required>
               <option></option>
-              <option <?php if($value->level =="administrator"){echo "selected";} ?> value="administrator">Administrator</option>
-              <option <?php if($value->level =="petugas"){echo "selected";} ?> value="petugas">Petugas</option>
-              <option <?php if($value->level =="dokter"){echo "selected";} ?> value="dokter">Dokter</option>
-              <option <?php if($value->level =="apoteker"){echo "selected";} ?> value="apoteker">Apoteker</option>
+              <option <?php if($value->LEVEL_PENGGUNA =="administrator"){echo "selected";} ?> value="administrator">Administrator</option>
+              <option <?php if($value->LEVEL_PENGGUNA =="petugas"){echo "selected";} ?> value="petugas">Petugas</option>
+              <option <?php if($value->LEVEL_PENGGUNA =="dokter"){echo "selected";} ?> value="dokter">Dokter</option>
+              <option <?php if($value->LEVEL_PENGGUNA =="apoteker"){echo "selected";} ?> value="apoteker">Apoteker</option>
             </select>
             <div class="invalid-feedback">
                 Level harus diisi.

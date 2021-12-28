@@ -30,12 +30,12 @@ class Beranda extends CI_Controller
 
     public function index()
     {
-        $pasien = $this->m_pasien->data('pasien')->num_rows();
-        $dokter = $this->m_user->jlm_dokter('user')->num_rows();
-        $pendapatan = $this->m_pembayaran->jlm_pendapatan('pembayaran')->result();
+        $pasien = $this->m_pasien->data('PASIEN')->num_rows();
+        $dokter = $this->m_user->jlm_dokter('PENGGUNA')->num_rows();
+        $pendapatan = $this->m_pembayaran->jlm_pendapatan('PEMBAYARAN')->result();
         $jlm_pendapatan = 0;
         foreach ($pendapatan as $value) {
-            $jlm_pendapatan += $value->total_bayar;
+            $jlm_pendapatan += $value->TOTAL_BAYAR;
         }
         $data = array(
             'title'        => 'Beranda',

@@ -30,14 +30,14 @@
     	<div class="row">
 	      <div class="mb-3 col-12">
 	        <label for="nik" class="form-label">NIK</label>
-	        <input name="nik" required type="number" placeholder="16 digit angka" class="form-control" value="<?= ucwords($profile->nik) ?>"  value="<?= ucwords($profile->nik) ?>" id="nik">
+	        <input name="nik" required type="number" placeholder="16 digit angka" class="form-control" value="<?= ucwords($profile->NIK) ?>"  value="<?= ucwords($profile->NIK) ?>" id="nik">
 	        <div class="invalid-feedback">
 	          NIK harus diisi.
 	        </div>
 	      </div>
 	      <div class="mb-3 col-12 ">
 	        <label for="nama" class="form-label">Nama Lengkap</label>
-	        <input name="nama" required type="text" class="form-control" value="<?= ucwords($profile->nama_user) ?>" id="nama">
+	        <input name="nama" required type="text" class="form-control" value="<?= ucwords($profile->NAMA_USER) ?>" id="nama">
 	        <div class="invalid-feedback">
 	          Nama Lengkap harus diisi.
 	        </div>
@@ -49,7 +49,7 @@
 	      </div>
 	      <div class="mb-3 col-12">
 		    <label name="alamat" for="alamat">Alamat Lengkap</label>
-		    <textarea class="form-control" name="alamat" id="alamat" rows="3" required><?= ucwords($profile->alamat) ?></textarea>
+		    <textarea class="form-control" name="alamat" id="alamat" rows="3" required><?= ucwords($profile->ALAMAT) ?></textarea>
 	        <div class="invalid-feedback">
 	          Alamat Lengkap harus diisi.
 	        </div>

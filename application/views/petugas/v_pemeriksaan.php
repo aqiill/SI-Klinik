@@ -8,27 +8,27 @@
 			<tr>
 				<td>Nama</td>
 				<td>:</td>
-				<td><?= $data->nama_pasien ?></td>
+				<td><?= $data->NAMA_PASIEN ?></td>
 			</tr>
 			<tr>
 				<td>Usia Pasien</td>
 				<td>:</td>
-				<td><?= $data->umur_pasien ?></td>
+				<td><?= $data->UMUR_PASIEN ?></td>
 			</tr>
 			<tr>
 				<td>Jenis Kelamin</td>
 				<td>:</td>
-				<td><?= $data->jenis_kelamin ?></td>
+				<td><?= $data->JENIS_KELAMIN ?></td>
 			</tr>
 			<tr>
 				<td>Petugas Pemeriksa</td>
 				<td>:</td>
-				<td><?= $data->nama_user ?></td>
+				<td><?= $data->NAMA_USER ?></td>
 			</tr>
 		</table>
 	</div>
 	<div class="card-body">
-		<form method="POST" action="<?= base_url('antrian/periksa/'.$data->id_antrian) ?>" class="needs-validation" novalidate>
+		<form method="POST" action="<?= base_url('antrian/periksa/'.$data->ID_ANTRIAN) ?>" class="needs-validation" novalidate>
 			<div class="row">
 				<div class="col-12 col-md-6">
 				<div class="form-group">

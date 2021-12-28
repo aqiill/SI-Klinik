@@ -35,13 +35,13 @@ class Periksa extends CI_Controller
         $level = $this->session->userdata('level');
 
         if ($level=="petugas") {
-            $periksa = $this->m_periksa->data_petugas('pemeriksaan',$id_user)->result();
+            $periksa = $this->m_periksa->data_petugas('PEMERIKSAAN',$id_user)->result();
         }
         elseif ($level =="dokter" ) {
-            $periksa = $this->m_periksa->data_dokter('pemeriksaan')->result();            
+            $periksa = $this->m_periksa->data_dokter('PEMERIKSAAN')->result();            
         }
         elseif ($level =="administrator" || $level =="dokter" ) {
-            $periksa = $this->m_periksa->data('pemeriksaan')->result();            
+            $periksa = $this->m_periksa->data('PEMERIKSAAN')->result();            
         }
 
 
@@ -61,7 +61,7 @@ class Periksa extends CI_Controller
         $level = $this->session->userdata('level');
         $id_user = $this->session->userdata('id_user');
         if ($level !='administrator') {
-            $pembayaran = $this->m_pembayaran->data_pembayaran_petugas('pembayaran',$id_user)->result();
+            $pembayaran = $this->m_pembayaran->data_pembayaran_petugas('PEMBAYARAN',$id_user)->result();
      
             $data = array(
                 'title'        => 'Pembayaran',
@@ -70,7 +70,7 @@ class Periksa extends CI_Controller
             );
         }
         else{
-            $pembayaran = $this->m_pembayaran->data('pembayaran')->result();
+            $pembayaran = $this->m_pembayaran->data('PEMBAYARAN')->result();
      
             $data = array(
                 'title'        => 'Pembayaran',
@@ -97,15 +97,15 @@ class Periksa extends CI_Controller
         }
 
         $data = array(
-            'id_user' => $this->session->userdata('id_user'),
-            'status_bayar' => $status_bayar
+            'ID_USER' => $this->session->userdata('id_user'),
+            'STATUS_BAYAR' => $status_bayar
         );
-        $this->m_pembayaran->bayar('pembayaran', $data,$id);
+        $this->m_pembayaran->bayar('PEMBAYARAN', $data,$id);
 
         $data = array(
-            'status_antrian' => $status_antrian
+            'STATUS_ANTRIAN' => $status_antrian
         );
-        $this->m_antrian->edit('antrian', $data,$id_antrian);
+        $this->m_antrian->edit('ANTRIAN', $data,$id_antrian);
         
         $this->session->set_flashdata('suskes', 'Status Pembayaran diubah!');
         redirect(base_url('periksa/pembayaran'));
@@ -142,7 +142,7 @@ class Periksa extends CI_Controller
         
         if ($valid->run() === false) {
 
-            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan_dokter('rekammedis',$id)->num_rows();
+            $cek_pemeriksaan = $this->m_antrian->cek_pemeriksaan_dokter('REKAMMEDIS',$id)->num_rows();
 
             if ($cek_pemeriksaan>0) {
                 $this->session->set_flashdata('gagal', 'Pasien sudah diperiksa oleh dokter!');
@@ -152,12 +152,12 @@ class Periksa extends CI_Controller
                 $this->session->set_flashdata('gagal', validation_errors());
 
                 $edit_status = array(
-                    'status_pemeriksaan' => 'dokter'
+                    'STATUS_PEMERIKSAAN' => 'dokter'
                 );
 
-                $this->m_periksa->edit('pemeriksaan',$edit_status,$id);
+                $this->m_periksa->edit('PEMERIKSAAN',$edit_status,$id);
 
-                $pasien = $this->m_periksa->cek_pasien('pemeriksaan',$id)->row();
+                $pasien = $this->m_periksa->cek_pasien('PEMERIKSAAN',$id)->row();
 
                 $data = array(
                     'title'        => 'Pemeriksaan',
@@ -178,14 +178,14 @@ class Periksa extends CI_Controller
             $keluhan     = $i->post('keluhan');
 
             $data = array(
-                'id_antrian'        => $id_antrian,
-                'tekanan_darah'        => $tekanan_darah,
-                'suhu_badan'        => $suhu_badan,
-                'keluhan'        => $keluhan,
-                'status_pemeriksaan'        => 'petugas'
+                'ID_ANTRIAN'        => $id_antrian,
+                'TEKANAN_DARAH'        => $tekanan_darah,
+                'SUHU_BADAN'        => $suhu_badan,
+                'KELUHAN'        => $keluhan,
+                'STATUS_PEMERIKSAAN'        => 'petugas'
             );
 
-            $this->m_antrian->tambah('pemeriksaan', $data);
+            $this->m_antrian->tambah('PEMERIKSAAN', $data);
 
             $this->session->set_flashdata('sukses', 'Pemeriksaan Oleh Petugas Selesai');
             redirect(base_url('antrian'));
@@ -233,26 +233,26 @@ class Periksa extends CI_Controller
             $rujukan     = $i->post('rujukan');
 
             $data = array(
-                'id_pemeriksaan'        => $id,
-                'id_user'        => $this->session->userdata('id_user'),
-                'diagnosa'        => $diagnosa,
-                'tindakan'        => $tindakan,
-                'rujukan'        => $rujukan
+                'ID_PEMERIKSAAN'        => $id,
+                'ID_USER'        => $this->session->userdata('id_user'),
+                'DIAGNOSA'        => $diagnosa,
+                'TINDAKAN'        => $tindakan,
+                'RUJUKAN'        => $rujukan
             );
 
-            $this->m_periksa->tambah('rekammedis', $data);
-            $id_rekam_medis = $this->db->insert_id();
+            $this->m_periksa->tambah('REKAMMEDIS', $data);
+            $id_rekam_medis = $this->m_periksa->last_id()->row()->ID;
 
             $data_pembayaran = array(
-                'id_rekam_medis'        => $id_rekam_medis,
-                'id_user'        => $this->session->userdata('id_user'),
-                'tgl_bayar'        => date('Y-m-d'),
+                'ID_REKAM_MEDIS'        => $id_rekam_medis,
+                'ID_USER'        => $this->session->userdata('id_user'),
+                'TGL_BAYAR'        => strtoupper(date('d-M-y')),
                 // harga jasa 
-                'total_bayar'        => 100000,
-                'status_bayar'        => 'pending'
+                'TOTAL_BAYAR'        => 100000,
+                'STATUS_BAYAR'        => 'pending'
             );
 
-            $this->m_periksa->tambah('pembayaran', $data_pembayaran);
+            $this->m_periksa->tambah('PEMBAYARAN', $data_pembayaran);
 
 
             $this->session->set_flashdata('sukses', 'Obat untuk Pasien?');

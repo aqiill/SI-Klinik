@@ -31,7 +31,7 @@ class User extends CI_Controller
 
     public function index()
     {
-        $user = $this->m_user->data('user')->result();
+        $user = $this->m_user->data('PENGGUNA')->result();
         $data = array(
             'title'        => 'User',
             'user'        => $user,
@@ -48,7 +48,7 @@ class User extends CI_Controller
         $valid->set_rules(
             'username',
             'Username',
-            'required|is_unique[user.username]',
+            'required|is_unique[PENGGUNA.USERNAME]',
             array(
                 'required'        => 'Username harus diisi',
                 'is_unique'       => 'Username '.$this->input->post('username').' sudah digunakan!',
@@ -87,15 +87,15 @@ class User extends CI_Controller
             $level     = $i->post('level');
 
             $data = array(
-                'nik'       => '',
-                'username'       => $username,
-                'password'        => sha1($password),
-                'nama_user'        => '',
-                'alamat'        => '',
-                'level'        => $level,
+                'NIK'       => '',
+                'USERNAME'       => $username,
+                'PASSWORD'        => sha1($password),
+                'NAMA_USER'        => '',
+                'ALAMAT'        => '',
+                'LEVEL'        => $level,
             );
 
-            $this->m_user->tambah('user', $data);
+            $this->m_user->tambah('PENGGUNA', $data);
 
             $this->session->set_flashdata('sukses', 'User Berhasil Ditambahkan!');
             redirect(base_url('user'));
@@ -126,10 +126,10 @@ class User extends CI_Controller
         } else {
 
             $data = array(
-                'level'        => $this->input->post('level')
+                'LEVEL'        => $this->input->post('level')
             );
 
-            $this->m_user->edit('user', $data, $id);
+            $this->m_user->edit('PENGGUNA', $data, $id);
 
             $this->session->set_flashdata('sukses', 'User Berhasil diubah!');
             redirect(base_url('user'));
@@ -142,7 +142,7 @@ class User extends CI_Controller
     {
         if($id=="") show_404();
 
-        $this->m_user->hapus('user', $id);
+        $this->m_user->hapus('PENGGUNA', $id);
 
         $this->session->set_flashdata('sukses', 'User Berhasil Dihapus!');
         redirect(base_url('user'));
